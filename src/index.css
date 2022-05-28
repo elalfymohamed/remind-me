@@ -4,6 +4,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-automatic: #202124;
+  --color-red: #5c2b29;
+  --color-orange: #614a19;
+  --color-yellow: #635d19;
+  --color-green: #345920;
+  --color-blue: #2d555e;
+  --color-purple: #5b2245;
+  --color-black: #000000;
+  --color-gray: #3c3f43;
+  --color-greenish-blue: #1e3a5f;
+  --color-grey: #442f19;
+  --color-white: #ffffff;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -21,4 +36,223 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin: 0 20px;
+}
+
+.add-task {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-input {
+  position: relative;
+}
+
+.input-task {
+  background-color: rgb(231, 231, 231);
+  height: 45px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 25px 0 10px;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 16px;
+}
+
+.input-task:focus {
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  color: #000000;
+}
+
+.input_submit {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: cornflowerblue;
+  border-radius: 50px;
+  border: 0;
+  font-size: 12px;
+  color: #fff;
+  width: 38px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.input_submit:active {
+  transform: scale3d(0.95, 0.95, 1);
+}
+
+.todo-list {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0;
+  width: 100%;
+}
+
+.todo-list-header {
+  margin-bottom: 20px;
+}
+
+.todo-list-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .todo-list {
+    padding: 0 10px;
+  }
+}
+
+/* potion color */
+
+.todo-options {
+  position: relative;
+}
+
+.options-color {
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.options-color-btn {
+  cursor: pointer;
+  width: max-content;
+  display: inline-block;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+.options-color-btn:hover {
+  color: #6495ed;
+}
+
+.options-color-btn:active {
+  transform: scale3d(0.95, 0.95, 1);
+}
+
+.option-active {
+  color: #6495ed;
+}
+
+.color-options-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #202124;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px 0;
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+
+.color-option {
+  border-radius: 50px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 35px;
+  height: 35px;
+}
+
+.color-option:hover {
+  border: 2px solid #ffffff;
+}
+
+.color-default-option {
+  border: 1px solid #5f6368;
+  opacity: 1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-default-option svg {
+  color: var(--color-white);
+}
+
+.color-default {
+  background-color: rgb(231, 231, 231);
+  border: 1px solid #5f6368;
+  color: var(--color-black);
+}
+
+.color-automatic {
+  background-color: var(--color-automatic);
+  border: 1px solid #5f6368;
+  color: var(--color-white);
+}
+
+.color-red {
+  background-color: var(--color-red);
+  border: 1px solid var(--color-red);
+  color: var(--color-white);
+}
+
+.color-orange {
+  background-color: var(--color-orange);
+  border: 1px solid var(--color-orange);
+  color: var(--color-white);
+}
+
+.color-yellow {
+  background-color: var(--color-yellow);
+  border: 1px solid var(--color-yellow);
+  color: var(--color-white);
+}
+
+.color-green {
+  background-color: var(--color-green);
+  border: 1px solid var(--color-green);
+  color: var(--color-white);
+}
+
+.color-greenish-blue {
+  background-color: var(--color-greenish-blue);
+  border: 1px solid var(--color-greenish-blue);
+  color: var(--color-white);
+}
+
+.color-blue {
+  background-color: var(--color-blue);
+  border: 1px solid var(--color-blue);
+  color: var(--color-white);
+}
+
+.color-purple {
+  background-color: var(--color-purple);
+  border: 1px solid var(--color-purple);
+  color: var(--color-white);
+}
+
+.color-grey {
+  background-color: var(--color-grey);
+  border: 1px solid var(--color-grey);
+  color: var(--color-white);
+}
+
+/* todo-install */
+
+.todo-install {
+  margin: 10px 0;
+  width: max-content;
+  display: inline-block;
+}
+
+.install-btn {
+  cursor: pointer;
+  margin: 0 5px;
+  transition: all 0.3s ease;
 }

@@ -1,23 +1,34 @@
 import React from "react";
 
 import InputFelid from "./components/InputFelid"
-import { Todo } from "./model";
+import { Todo, IsData } from "./model";
 
 const { useState } = React;
 
 const App: React.FC = () => {
-  const [todo, setTodo] = useState<string>("")
+
+  const [data, setData] = useState<IsData>({
+    todo: "",
+    color: "",
+    install: false
+  })
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (todo.trim() !== "") {
+    if (data.todo.trim() !== "") {
       setTodos([...todos, {
         id: Date.now(),
-        todo: todo,
+        todo: data.todo,
+        color: data.color,
         idDone: false,
+        isInstall: data.install
       }]);
-      setTodo("");
+      setData({
+        todo: "",
+        color: "",
+        install: false
+      });
     }
   }
 
@@ -28,8 +39,17 @@ const App: React.FC = () => {
         <h1>
           Add Task
         </h1>
-        <InputFelid todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
+        <InputFelid data={data} setData={setData} handleSubmit={handleSubmit} />
       </header>
+      <section className="todo-list">
+        <div className="todo-list-header">
+          <h2>Todo List</h2>
+        </div>
+        <div className="todo-list-body">
+
+        </div>
+
+      </section>
     </div>
   );
 }
