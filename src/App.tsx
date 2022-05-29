@@ -1,6 +1,8 @@
 import React from "react";
 
 import InputFelid from "./components/InputFelid"
+import { Todos } from "./components/Todos"
+
 import { Todo, IsData } from "./model";
 
 const { useState } = React;
@@ -11,7 +13,8 @@ const App: React.FC = () => {
     todo: "",
     color: "",
     install: false
-  })
+  });
+
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -46,9 +49,25 @@ const App: React.FC = () => {
           <h2>Todo List</h2>
         </div>
         <div className="todo-list-body">
+          {
+            todos.map((item) => (
+              <div className="todo-items" key={item.id}>
+                {
+                  item.isInstall ?
+                    <div className="todo-install">
+                      <h6>install</h6>
+                      <div className="">
+                        <Todos item={item} />
+                      </div>
 
+                    </div>
+                    :
+                    <div></div>
+                }
+              </div>
+            ))
+          }
         </div>
-
       </section>
     </div>
   );

@@ -89,7 +89,7 @@ body {
 .todo-list {
   max-width: 1200px;
   margin: 50px auto;
-  padding: 0;
+  padding: 0 25px;
   width: 100%;
 }
 
@@ -134,7 +134,7 @@ body {
 }
 
 .options-color-btn:active {
-  transform: scale3d(0.95, 0.95, 1);
+  transform: scale3d(1, 1, 1);
 }
 
 .option-active {
