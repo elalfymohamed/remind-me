@@ -1,21 +1,29 @@
 import mongoose from "mongoose";
 
-const todoSchema = mongoose.Schema({
-  userId: {
-    type: mongoose.Types.ObjectId,
+const todoSchema = mongoose.Schema(
+  {
+    todo: {
+      type: String,
+      require: true,
+    },
+    color: {
+      type: String,
+      require: true,
+    },
+    install: {
+      type: Boolean,
+    },
+    is_delete: {
+      type: Boolean,
+      default: false,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
   },
-  todo: {
-    type: String,
-    require: true,
-  },
-  color: {
-    type: String,
-    require: true,
-  },
-  install: {
-    type: Boolean,
-  },
-});
+  { timestamps: true }
+);
 
 const Todo = mongoose.model("todo", todoSchema);
 
