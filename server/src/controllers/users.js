@@ -1,8 +1,10 @@
+import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-
-import jwt from "jsonwebtoken";
+import jsonwebtoken from "jsonwebtoken";
 
 import Users from "../models/users.js";
+
+dotenv.config();
 
 const PRIVET_KEY = process.env.PRIVET_KEY;
 
@@ -26,7 +28,7 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
+    const token = jsonwebtoken.sign(
       {
         id: result._id,
         email,
@@ -77,7 +79,7 @@ export const signin = async (req, res) => {
       throw new Error("password doesn't exist");
     }
 
-    const token = jwt.sign(
+    const token = jsonwebtoken.sign(
       {
         id: existingUser._id,
         email: existingUser.email,

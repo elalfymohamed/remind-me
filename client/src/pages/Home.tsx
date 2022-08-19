@@ -138,42 +138,44 @@ const Home: React.FC = () => {
         <InputFelid data={data} setData={setData} handleSubmit={handleSubmit} />
       </header>
       <section className="todo-list">
-        <div className="todo-list-header">
-          <h2>Todo List</h2>
-        </div>
-        <div className="todo-list-body">
-          {todos.ITodos.length >= 1 && (
-            <div className="todo-install todos">
-              <h6># Install</h6>
-              <div className="note-items">
-                {todos.ITodos.map((item) => (
-                  <div className="todo-items" key={item.id}>
-                    <Todos
-                      item={item}
-                      handelDeleteTodo={handelDeleteTodo}
-                      handelChangeInstallTodo={handelChangeInstallTodo}
-                    />
-                  </div>
-                ))}
+        <div className="container">
+          <div className="todo-list-header">
+            <h2>Todo List</h2>
+          </div>
+          <div className="todo-list-body">
+            {todos.ITodos.length >= 1 && (
+              <div className="todo-install todos">
+                <h6># Install</h6>
+                <div className="note-items">
+                  {todos.ITodos.map((item) => (
+                    <div className="todo-items" key={item.id}>
+                      <Todos
+                        item={item}
+                        handelDeleteTodo={handelDeleteTodo}
+                        handelChangeInstallTodo={handelChangeInstallTodo}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
-          {todos.NTodos.length >= 1 && (
-            <div className="todo-other todos">
-              <h6># other</h6>
-              <div className="note-items">
-                {todos.NTodos.map((item) => (
-                  <div className="todo-items" key={item.id}>
-                    <Todos
-                      item={item}
-                      handelDeleteTodo={handelDeleteTodo}
-                      handelChangeInstallTodo={handelChangeInstallTodo}
-                    />
-                  </div>
-                ))}
+            )}
+            {todos.NTodos.length >= 1 && (
+              <div className="todo-other todos">
+                <h6># other</h6>
+                <div className="note-items">
+                  {todos.NTodos.map((item) => (
+                    <div className="todo-items" key={item.id}>
+                      <Todos
+                        item={item}
+                        handelDeleteTodo={handelDeleteTodo}
+                        handelChangeInstallTodo={handelChangeInstallTodo}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
     </>

@@ -25,11 +25,15 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #202124;
+  background-color: #fafafa;
   height: 100%;
   font-size: 15px;
   font-weight: 600;
   font-family: "Josefin Sans", sans-serif;
+}
+
+.body-todo {
+  background-color: #202124;
   transition: all 0.3s ease-in-out;
 }
 
@@ -157,8 +161,12 @@ p {
 }
 
 .todo-list {
+  margin: 50px 0;
+}
+
+.container {
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 0 auto;
   padding: 0 25px;
   width: 100%;
 }

@@ -1,6 +1,8 @@
 import { useRoutes } from "react-router-dom";
 
-import { Signin } from "../auth/Signin";
+import { SignIn } from "../auth/SignIn";
+import { SignUp } from "../auth/SignUp";
+
 import Home from "../pages/Home";
 
 // private router
@@ -15,7 +17,10 @@ const Routers = () => {
     },
     {
       element: <AuthRoutes />,
-      children: [{ path: "/auth/signin", element: <Signin /> }],
+      children: [
+        { path: "/auth/signin", element: <SignIn /> },
+        { path: "/auth/signup", element: <SignUp /> },
+      ],
     },
   ]);
 
