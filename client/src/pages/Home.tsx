@@ -1,10 +1,13 @@
 import React from "react";
-
+// router-dom
+import { NavLink } from "react-router-dom";
+// components
 import InputFelid from "../components/InputFelid";
 import { Todos } from "../components/Todos";
-
+// TS -> interface
 import { Todo, IsData } from "../model";
 
+// react hooks
 const { useState } = React;
 
 const Home: React.FC = () => {
@@ -102,9 +105,36 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <header className="App-header">
-        <h1>Add Task</h1>
+        <nav className="header-nav">
+          <div className="nav-container">
+            <h4>Add Task</h4>
+
+            <ul className="nav-items">
+              <li>
+                <div className="nav-user">
+                  <h6>sanfkndf kfmskdf</h6>
+                </div>
+              </li>
+              <li>
+                <NavLink to="/" className="nav-link">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/recently" className="nav-link">
+                  Recently
+                </NavLink>
+              </li>
+              <li>
+                <button type="button" className="btn btn-login">
+                  LogIn
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <InputFelid data={data} setData={setData} handleSubmit={handleSubmit} />
       </header>
       <section className="todo-list">
@@ -146,7 +176,7 @@ const Home: React.FC = () => {
           )}
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

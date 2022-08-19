@@ -17,17 +17,83 @@
   --color-greenish-blue: #1e3a5f;
   --color-grey: #442f19;
   --color-white: #ffffff;
+  --color-nav-haver: #6495ed;
+  --color-btn: #6495ed;
+  --color-btn-log-hover: #ad1712;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #282c34;
+  background-color: #202124;
   height: 100%;
   font-size: 15px;
   font-weight: 600;
   font-family: "Josefin Sans", sans-serif;
   transition: all 0.3s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.header-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 25px;
+  width: 100%;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-nav .nav-items {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  justify-content: space-between;
+  max-width: 550px;
+  width: 100%;
+}
+
+.header-nav .nav-items li:not(:last-child) {
+  margin-right: 5px;
+}
+
+.nav-link {
+  color: var(--color-white);
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--color-nav-haver);
+}
+
+.btn-login {
+  background-color: transparent;
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background-color: var(--color-btn-log-hover);
 }
 
 .App-header {
@@ -43,7 +109,9 @@ body {
 .add-task {
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
 }
 
 .form-input {
@@ -132,7 +200,7 @@ body {
   transition: all 0.3s ease;
 }
 .options-color-btn:hover {
-  color: #6495ed;
+  color: var(--color-btn);
 }
 
 .options-color-btn:active {
@@ -140,7 +208,7 @@ body {
 }
 
 .option-active {
-  color: #6495ed;
+  color: var(--color-btn);
 }
 
 .color-options-group {
