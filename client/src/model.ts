@@ -11,3 +11,10 @@ export interface IsData {
   color: string;
   install: boolean;
 }
+
+export interface Form_Data {
+  first_name?: string;
+  last_name?: string;
+  email: string;
+  password: string;
+}
