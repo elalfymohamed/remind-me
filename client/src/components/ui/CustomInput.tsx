@@ -1,5 +1,7 @@
 import React from "react";
 
+import { NextPage } from "next";
+
 export interface Props {
   label: string;
   type: string;
@@ -9,7 +11,7 @@ export interface Props {
   errorInput?: boolean;
 }
 
-export const CustomInput: React.FC<Props> = ({
+export const CustomInput: NextPage<Props> = ({
   label,
   type,
   name,

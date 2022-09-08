@@ -1,6 +1,7 @@
 import React from "react";
-// router-dom
-import { NavLink } from "react-router-dom";
+import type { NextPage } from "next";
+// router link
+import Link from "next/link";
 // components
 import InputFelid from "../components/InputFelid";
 import { Todos } from "../components/Todos";
@@ -10,7 +11,7 @@ import { Todo, IsData } from "../model";
 // react hooks
 const { useState } = React;
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   type DTodos = {
     NTodos: Todo[];
     ITodos: Todo[];
@@ -118,14 +119,14 @@ const Home: React.FC = () => {
                 </div>
               </li>
               <li>
-                <NavLink to="/" className="nav-link">
-                  Home
-                </NavLink>
+                <Link href="/">
+                  <a className="nav-link">Home</a>
+                </Link>
               </li>
               <li>
-                <NavLink to="/recently" className="nav-link">
-                  Recently
-                </NavLink>
+                <Link href="/recently">
+                  <a className="nav-link">Recently</a>
+                </Link>
               </li>
               <li>
                 <button type="button" className="btn btn-login">

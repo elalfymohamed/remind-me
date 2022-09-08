@@ -1,10 +1,11 @@
+import type { NextPage } from "next";
 import { MdOutlineInvertColorsOff } from "react-icons/md";
 
 interface Props {
   handleClickOptions: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-export const Options: React.FC<Props> = ({ handleClickOptions }) => {
+export const Options: NextPage<Props> = ({ handleClickOptions }) => {
   const colors = [
     "default",
     "automatic",

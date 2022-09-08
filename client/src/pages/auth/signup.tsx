@@ -1,20 +1,23 @@
 import * as React from "react";
-//  package
-import { Link } from "react-router-dom";
+import type { NextPage } from "next";
+import Link from "next/link";
 // interface -> TS
-import { Form_Data } from "../model";
+import { Form_Data } from "../../model";
 // component -> ui
-import { CustomInput } from "../components/ui/CustomInput";
-
+import { CustomInput } from "../../components/ui/CustomInput";
 // react hooks
 const { useState } = React;
-export const SignIn: React.FC = () => {
-  const [userData, setUserData] = useState<any>({
+const SignUp: NextPage = () => {
+  const [userData, setUserData] = useState<Form_Data>({
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
   });
 
   const validation = {
+    last_name: (val: string): boolean => !val,
+    first_name: (val: string): boolean => !val,
     email: (val: string): boolean | string =>
       val && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
     password: (val: string): boolean | string =>
@@ -24,35 +27,16 @@ export const SignIn: React.FC = () => {
       ),
   } as any;
 
-  const validationForm = (): { valid: boolean; errors: object } => {
-    let errors = {} as any;
-    let valid = false as any;
-
-    for (let key of Object.keys(userData)) {
-      errors[key] = !validation[key](userData[key]);
-      valid |= errors[key];
-    }
-
-    return {
-      errors: errors,
-      valid: !valid,
-    };
-  };
-
   const handelOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData((state: Form_Data) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
-
-    const { errors, valid } = validationForm();
   };
 
   const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(userData);
-    const { errors, valid } = validationForm();
-    console.log(errors);
   };
 
   return (
@@ -61,16 +45,29 @@ export const SignIn: React.FC = () => {
         <div className="auth-section__header">
           <h2>Add Task</h2>
         </div>
-        <h2 className="auth-section__title">Welcome back!</h2>
-        <h3 className="auth-section__your-account">Sign in to your account</h3>
+        <h2 className="auth-section__title">Create an account</h2>
         <div className="auth-section__account">
-          <h3>Don't have an account?</h3>
-          <Link to="/auth/signup" className="auth-section__link">
-            Sign Up
+          <h3>Already have an account?</h3>
+          <Link href="/auth/signin">
+            <a className="auth-section__link">Sign In</a>
           </Link>
         </div>
         <div className="auth-section__form">
           <form className="form-control" onSubmit={handelSubmit}>
+            <CustomInput
+              label="first name"
+              type="text"
+              onChange={handelOnChange}
+              name="first_name"
+              errorMgs="first name is require"
+            />
+            <CustomInput
+              label="last name"
+              type="text"
+              onChange={handelOnChange}
+              name="last_name"
+              errorMgs="last name is require"
+            />
             <CustomInput
               label="email"
               type="email"
@@ -96,3 +93,5 @@ export const SignIn: React.FC = () => {
     </section>
   );
 };
+
+export default SignUp;
