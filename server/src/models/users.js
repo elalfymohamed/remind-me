@@ -17,14 +17,6 @@ const userSchema = mongoose.Schema({
     type: String,
     require: [true, "password is require"],
   },
-  todos: [
-    {
-      todoId: {
-        type: mongoose.Types.ObjectId,
-      },
-    },
-    { timestamps: true },
-  ],
 });
 
 const Users = mongoose.model("user", userSchema);
