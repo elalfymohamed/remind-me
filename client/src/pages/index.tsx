@@ -7,16 +7,15 @@ import InputFelid from "../components/InputFelid";
 import { Todos } from "../components/Todos";
 // TS -> interface
 import { Todo, IsData } from "../model";
+type DTodos = {
+  NTodos: Todo[];
+  ITodos: Todo[];
+};
 
 // react hooks
 const { useState } = React;
 
 const Home: NextPage = () => {
-  type DTodos = {
-    NTodos: Todo[];
-    ITodos: Todo[];
-  };
-
   const [data, setData] = useState<IsData>({
     todo: "",
     color: "",
