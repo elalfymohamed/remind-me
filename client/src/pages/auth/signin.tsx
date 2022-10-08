@@ -1,6 +1,6 @@
 import * as React from "react";
-
 import type { NextPage } from "next";
+
 import Link from "next/link";
 // interface -> TS
 import { Form_Data } from "../../model";
@@ -10,7 +10,7 @@ import { CustomInput } from "../../components/ui/CustomInput";
 // react hooks
 const { useState } = React;
 const SignIn: NextPage = () => {
-  const [userData, setUserData] = useState<any>({
+  const [userData, setUserData] = useState<Form_Data | any>({
     email: "",
     password: "",
   });
@@ -23,11 +23,11 @@ const SignIn: NextPage = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#/|])[A-Za-z\d@$!%*?&#/|]{8,}$/.test(
         val
       ),
-  } as any;
+  } as Form_Data | any;
 
   const validationForm = (): { valid: boolean; errors: object } => {
-    let errors = {} as any;
-    let valid = false as any;
+    let errors = {} as any | Form_Data;
+    let valid = false as any | boolean;
 
     for (let key of Object.keys(userData)) {
       errors[key] = !validation[key](userData[key]);

@@ -1,23 +1,30 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 import jwt_decode from "jwt-decode";
 
 export function middleware(request: NextRequest) {
+  const { cookies } = request;
   const { pathname } = request.nextUrl;
+
   if (pathname.startsWith("/_next")) return NextResponse.next();
-  const cookies = request.cookies.get("authorization") as string;
 
-  if (cookies === "undefined") {
-    request.nextUrl.pathname = "/auth/signin";
-    return NextResponse.redirect(request.nextUrl);
-  }
+  const hasToken = (cookies.get("authorization") ?? false) as any;
 
-  const decoded = jwt_decode(cookies) as { id: string };
+  if (hasToken) {
+    const decoded = (jwt_decode(hasToken) ?? false) as { _id: string };
 
-  if (cookies && decoded.id) {
-    if (pathname.includes("/auth")) {
-      request.nextUrl.pathname = "/";
+    if (hasToken && decoded._id) {
+      if (pathname.includes("/auth")) {
+        request.nextUrl.pathname = "/";
+        return NextResponse.redirect(request.nextUrl);
+      }
+    } else {
+      request.nextUrl.pathname = "/auth/signin";
+      return NextResponse.redirect(request.nextUrl);
+    }
+  } else {
+    if (!pathname.includes("/auth")) {
+      request.nextUrl.pathname = "/auth/signin";
       return NextResponse.redirect(request.nextUrl);
     }
   }

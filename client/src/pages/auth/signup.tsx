@@ -8,7 +8,7 @@ import { CustomInput } from "../../components/ui/CustomInput";
 // react hooks
 const { useState } = React;
 const SignUp: NextPage = () => {
-  const [userData, setUserData] = useState<Form_Data>({
+  const [userData, setUserData] = useState<Form_Data | any>({
     first_name: "",
     last_name: "",
     email: "",
@@ -25,7 +25,7 @@ const SignUp: NextPage = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#/|])[A-Za-z\d@$!%*?&#/|]{8,}$/.test(
         val
       ),
-  } as any;
+  } as Form_Data | any;
 
   const handelOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData((state: Form_Data) => ({

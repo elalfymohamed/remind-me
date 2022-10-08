@@ -13,7 +13,7 @@ type DTodos = {
 };
 
 // react hooks
-const { useState } = React;
+const { useState, useEffect } = React;
 
 const Home: NextPage = () => {
   const [data, setData] = useState<IsData>({
@@ -103,6 +103,12 @@ const Home: NextPage = () => {
       ITodos: [...todos.ITodos, { ...todo, isInstall: true }],
     });
   };
+
+  useEffect(() => {
+    document.body.classList.add("body-todo");
+
+    return () => document.body.classList.remove("body-todo");
+  }, []);
 
   return (
     <>
