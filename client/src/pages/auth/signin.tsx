@@ -1,11 +1,13 @@
 import * as React from "react";
-import type { NextPage } from "next";
 
+import type { NextPage } from "next";
 import Link from "next/link";
+// fetch auth
+import { fetchAuth } from "../../api";
 // interface -> TS
 import { Form_Data } from "../../model";
 // component -> ui
-import { CustomInput } from "../../components/ui/CustomInput";
+import { CustomInput, CustomButton } from "../../components/ui";
 
 // react hooks
 const { useState } = React;
@@ -14,6 +16,9 @@ const SignIn: NextPage = () => {
     email: "",
     password: "",
   });
+
+  const [inputError, setInputError] = useState<Form_Data | object>();
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const validation = {
     email: (val: string): boolean | string =>
@@ -45,15 +50,22 @@ const SignIn: NextPage = () => {
       ...state,
       [e.target.name]: e.target.value,
     }));
-
-    const { errors, valid } = validationForm();
   };
 
   const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userData);
     const { errors, valid } = validationForm();
-    console.log(errors);
+
+    if (!valid) {
+      setInputError(errors);
+    } else {
+      setIsPending(true);
+      fetchAuth("auth/signin", userData)
+        .then((res) => console.log(res))
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -87,9 +99,11 @@ const SignIn: NextPage = () => {
               errorMgs="password is require"
             />
             <div className="form__submit">
-              <button type="submit" className="btn-submit">
-                submit
-              </button>
+              <CustomButton
+                text="submit"
+                typeBtn="submit"
+                isPending={isPending}
+              />
             </div>
           </form>
         </div>

@@ -47,6 +47,37 @@ p {
   margin: 0;
 }
 
+button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* loader */
+.loader {
+  width: 100%;
+}
+.loader-inner {
+  animation: loader-inner 1s linear infinite;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
+  height: 20px;
+  width: 20px;
+  margin: 0 auto;
+}
+/* loader-inner */
+@keyframes loader-inner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* end loader */
+
 .header-nav {
   max-width: 1200px;
   margin: 0 auto;
@@ -475,7 +506,7 @@ p {
 }
 
 .auth-section__form {
-  max-width: 250px;
+  max-width: 300px;
   width: 100%;
   margin: 1rem auto 0 auto;
 }
@@ -493,7 +524,7 @@ p {
 
 .form-control__input label {
   text-transform: capitalize;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-bottom: 0.2rem;
   font-weight: 500;
   color: #000;
@@ -523,7 +554,7 @@ p {
   font-weight: 500;
   color: #fff;
   background-color: #305a92;
-  height: 2.3rem;
+  height: 2.5rem;
   border-radius: 4px;
   cursor: pointer;
   text-transform: capitalize;
