@@ -57,6 +57,8 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(req);
+
   if (!email || !password) {
     res.status(404);
     throw new Error("email and password is required");
@@ -65,6 +67,11 @@ export const signin = async (req, res) => {
     const existingUser = await Users.findOne({ email });
 
     if (!existingUser) {
+      //  return res.status(404).json({
+      //     status: 404,
+      //     data: "error",
+      //     msg: "User doesn't exist",
+      //   });
       res.status(404);
       throw new Error("User doesn't exist");
     }

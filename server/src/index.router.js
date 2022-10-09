@@ -20,7 +20,7 @@ export const endpoints = async (app) => {
   app.use(express.json());
   app.use(cors());
 
-  app.use("/api", usersRouter);
+  app.use("/auth", usersRouter);
 
   app.get("/", (req, res) => {
     res.send(" hello server");
