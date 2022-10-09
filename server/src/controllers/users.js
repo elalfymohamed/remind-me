@@ -15,8 +15,11 @@ export const signup = async (req, res) => {
     const existingUser = await Users.findOne({ email });
 
     if (existingUser) {
-      res.status(404);
-      throw new Error("User already exist");
+      return res.status(404).json({
+        status: 404,
+        msg: "error",
+        data: "User already exist",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -41,10 +44,10 @@ export const signup = async (req, res) => {
 
     res.status(201).json({
       status: 201,
+      msg: "success",
       data: {
         token: token,
       },
-      msg: "success",
     });
   } catch (error) {
     console.log(error);
@@ -57,23 +60,22 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req);
-
   if (!email || !password) {
-    res.status(404);
-    throw new Error("email and password is required");
+    return res.status(404).json({
+      status: 404,
+      msg: "error",
+      data: "email and password is required",
+    });
   }
   try {
     const existingUser = await Users.findOne({ email });
 
     if (!existingUser) {
-      //  return res.status(404).json({
-      //     status: 404,
-      //     data: "error",
-      //     msg: "User doesn't exist",
-      //   });
-      res.status(404);
-      throw new Error("User doesn't exist");
+      return res.status(404).json({
+        status: 404,
+        msg: "error",
+        data: "User doesn't exist",
+      });
     }
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -82,8 +84,11 @@ export const signin = async (req, res) => {
     );
 
     if (!isPasswordCorrect) {
-      res.status(404);
-      throw new Error("password doesn't exist");
+      return res.status(404).json({
+        status: 404,
+        msg: "error",
+        data: "password doesn't exist",
+      });
     }
 
     const token = jsonwebtoken.sign(
@@ -99,10 +104,10 @@ export const signin = async (req, res) => {
 
     res.status(200).json({
       status: 200,
+      msg: "success",
       data: {
         token: token,
       },
-      msg: "success",
     });
   } catch (error) {
     console.log(error);
