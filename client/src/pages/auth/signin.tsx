@@ -2,6 +2,10 @@ import * as React from "react";
 
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+//
+import Cookies from "js-cookie";
 // fetch auth
 import { fetchAuth } from "../../api";
 // interface -> TS
@@ -9,15 +13,24 @@ import { Form_Data } from "../../model";
 // component -> ui
 import { CustomInput, CustomButton } from "../../components/ui";
 
+// type -> ts
+type InputError = {
+  email?: boolean;
+  password?: boolean;
+};
+
 // react hooks
 const { useState } = React;
 const SignIn: NextPage = () => {
+  const router = useRouter();
+
   const [userData, setUserData] = useState<Form_Data | any>({
     email: "",
     password: "",
   });
 
-  const [inputError, setInputError] = useState<Form_Data | object>();
+  const [inputError, setInputError] = useState<InputError>({});
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const validation = {
@@ -31,8 +44,8 @@ const SignIn: NextPage = () => {
   } as Form_Data | any;
 
   const validationForm = (): { valid: boolean; errors: object } => {
-    let errors = {} as any | Form_Data;
-    let valid = false as any | boolean;
+    let errors = {} as InputError | any;
+    let valid = false as any;
 
     for (let key of Object.keys(userData)) {
       errors[key] = !validation[key](userData[key]);
@@ -50,6 +63,7 @@ const SignIn: NextPage = () => {
       ...state,
       [e.target.name]: e.target.value,
     }));
+    setInputError({});
   };
 
   const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
@@ -61,9 +75,27 @@ const SignIn: NextPage = () => {
     } else {
       setIsPending(true);
       fetchAuth("auth/signin", userData)
-        .then((res) => console.log(res))
+        .then((res) => {
+          if (res.status === 200) {
+            Cookies.set("authorization", res.data.data.token, {
+              expires: 7,
+              path: "/",
+            });
+            setIsPending(false);
+            router.push("/");
+            setUserData({
+              email: "",
+              password: "",
+            });
+          }
+          if (res.status === 404) {
+            setErrorMsg(res.data);
+            setIsPending(false);
+          }
+        })
         .catch((error) => {
-          console.log(error);
+          console.log(error.message);
+          setIsPending(false);
         });
     }
   };
@@ -89,14 +121,18 @@ const SignIn: NextPage = () => {
               type="email"
               onChange={handelOnChange}
               name="email"
+              value={userData.email}
               errorMgs="email is require"
+              inputError={inputError.email}
             />
             <CustomInput
               label="password"
               type="password"
               onChange={handelOnChange}
               name="password"
+              value={userData.password}
               errorMgs="password is require"
+              inputError={inputError.password}
             />
             <div className="form__submit">
               <CustomButton

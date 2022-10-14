@@ -135,7 +135,7 @@ const Home: NextPage = () => {
               </li>
               <li>
                 <button type="button" className="btn btn-login">
-                  LogIn
+                  LogOut
                 </button>
               </li>
             </ul>

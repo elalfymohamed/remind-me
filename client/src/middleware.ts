@@ -11,9 +11,9 @@ export function middleware(request: NextRequest) {
   const hasToken = (cookies.get("authorization") ?? false) as any;
 
   if (hasToken) {
-    const decoded = (jwt_decode(hasToken) ?? false) as { _id: string };
+    const decoded = (jwt_decode(hasToken) ?? false) as { id: string };
 
-    if (hasToken && decoded._id) {
+    if (hasToken && decoded.id) {
       if (pathname.includes("/auth")) {
         request.nextUrl.pathname = "/";
         return NextResponse.redirect(request.nextUrl);

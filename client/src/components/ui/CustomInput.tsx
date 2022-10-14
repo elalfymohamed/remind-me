@@ -8,7 +8,8 @@ export interface Props {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorMgs?: string;
-  errorInput?: boolean;
+  inputError?: boolean;
+  value: string;
 }
 
 export const CustomInput: NextPage<Props> = ({
@@ -17,7 +18,8 @@ export const CustomInput: NextPage<Props> = ({
   name,
   onChange,
   errorMgs,
-  errorInput,
+  inputError,
+  value,
 }) => {
   return (
     <div className="form-control__input">
@@ -27,8 +29,9 @@ export const CustomInput: NextPage<Props> = ({
         className="input-control"
         name={name}
         onChange={onChange}
+        value={value}
       />
-      {errorInput && (
+      {inputError && (
         <div className="error_msg">
           <p>{errorMgs}</p>
         </div>

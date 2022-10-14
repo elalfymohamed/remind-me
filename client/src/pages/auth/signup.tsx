@@ -1,13 +1,33 @@
 import * as React from "react";
+
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+//
+import Cookies from "js-cookie";
 // interface -> TS
 import { Form_Data } from "../../model";
 // component -> ui
-import { CustomInput } from "../../components/ui/CustomInput";
+import { CustomInput, CustomButton } from "../../components/ui";
+// fetch auth
+import { fetchAuth } from "../../api";
+// set Cooke
+import { setCooke } from "../../utility/Cookies";
+
+// type -> ts
+type InputError = {
+  email?: boolean;
+  password?: boolean;
+  first_name?: boolean;
+  last_name?: boolean;
+};
+
 // react hooks
 const { useState } = React;
 const SignUp: NextPage = () => {
+  const router = useRouter();
+
   const [userData, setUserData] = useState<Form_Data | any>({
     first_name: "",
     last_name: "",
@@ -15,9 +35,13 @@ const SignUp: NextPage = () => {
     password: "",
   });
 
+  const [inputError, setInputError] = useState<InputError>({});
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [isPending, setIsPending] = useState<boolean>(false);
+
   const validation = {
-    last_name: (val: string): boolean => !val,
-    first_name: (val: string): boolean => !val,
+    last_name: (val: string): number => val.length,
+    first_name: (val: string): number => val.length,
     email: (val: string): boolean | string =>
       val && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
     password: (val: string): boolean | string =>
@@ -32,11 +56,59 @@ const SignUp: NextPage = () => {
       ...state,
       [e.target.name]: e.target.value,
     }));
+    setInputError({});
+  };
+
+  const validationForm = (): { errors: Object; valid: Object } => {
+    let errors = {} as any;
+    let valid = false as any;
+
+    for (let key of Object.keys(userData)) {
+      errors[key] = !validation[key](userData[key]);
+      valid |= errors[key];
+    }
+
+    return {
+      errors: errors,
+      valid: !valid,
+    };
   };
 
   const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userData);
+    const { errors, valid } = validationForm();
+
+    if (!valid) {
+      setInputError(errors);
+    } else {
+      setIsPending(true);
+      fetchAuth("auth/signup", userData)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 201) {
+            Cookies.set("authorization", res.data.data.token, {
+              expires: 7,
+              path: "/",
+            });
+            router.push("/");
+            setIsPending(false);
+            setUserData({
+              first_name: "",
+              last_name: "",
+              email: "",
+              password: "",
+            });
+          }
+          if (res.status === 404) {
+            setErrorMsg(res.data);
+            setIsPending(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+          setIsPending(false);
+        });
+    }
   };
 
   return (
@@ -59,33 +131,43 @@ const SignUp: NextPage = () => {
               type="text"
               onChange={handelOnChange}
               name="first_name"
+              value={userData.first_name}
               errorMgs="first name is require"
+              inputError={inputError.first_name}
             />
             <CustomInput
               label="last name"
               type="text"
               onChange={handelOnChange}
               name="last_name"
+              value={userData.last_name}
               errorMgs="last name is require"
+              inputError={inputError.last_name}
             />
             <CustomInput
               label="email"
               type="email"
               onChange={handelOnChange}
               name="email"
+              value={userData.email}
               errorMgs="email is require"
+              inputError={inputError.email}
             />
             <CustomInput
               label="password"
               type="password"
               onChange={handelOnChange}
               name="password"
+              value={userData.password}
               errorMgs="password is require"
+              inputError={inputError.password}
             />
             <div className="form__submit">
-              <button type="submit" className="btn-submit">
-                submit
-              </button>
+              <CustomButton
+                text="submit"
+                typeBtn="submit"
+                isPending={isPending}
+              />
             </div>
           </form>
         </div>
