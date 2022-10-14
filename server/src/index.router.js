@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import usersRouter from "./router/users.js";
 
@@ -19,6 +20,7 @@ export const endpoints = async (app) => {
 
   app.use(express.json());
   app.use(cors());
+  app.use(cookieParser());
 
   app.use("/auth", usersRouter);
 
