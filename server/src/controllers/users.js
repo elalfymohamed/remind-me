@@ -41,6 +41,7 @@ export const signup = async (req, res) => {
       PRIVET_KEY,
       { expiresIn: "7d" }
     );
+    req.session.user = result;
 
     res.status(201).json({
       status: 201,
@@ -101,6 +102,8 @@ export const signin = async (req, res) => {
       PRIVET_KEY,
       { expiresIn: "7d" }
     );
+
+    req.session.user = existingUser;
 
     res.status(200).json({
       status: 200,
