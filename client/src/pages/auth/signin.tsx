@@ -110,8 +110,8 @@ const SignIn: NextPage = () => {
         <h3 className="auth-section__your-account">Sign in to your account</h3>
         <div className="auth-section__account">
           <h3>Don&apos;t have an account?</h3>
-          <Link href="/auth/signup">
-            <a className="auth-section__link">Sign Up</a>
+          <Link href="/auth/signup" className="auth-section__link">
+            Sign Up
           </Link>
         </div>
         <div className="auth-section__form">

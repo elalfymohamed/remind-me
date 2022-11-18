@@ -13,7 +13,7 @@ import { CustomInput, CustomButton } from "../../components/ui";
 // fetch auth
 import { fetchAuth } from "../../api";
 // set Cooke
-import { setCooke } from "../../utility/Cookies";
+// import { setCooke } from "../../utility/Cookies";
 
 // type -> ts
 type InputError = {
@@ -120,8 +120,8 @@ const SignUp: NextPage = () => {
         <h2 className="auth-section__title">Create an account</h2>
         <div className="auth-section__account">
           <h3>Already have an account?</h3>
-          <Link href="/auth/signin">
-            <a className="auth-section__link">Sign In</a>
+          <Link href="/auth/signin" className="auth-section__link">
+            Sign In
           </Link>
         </div>
         <div className="auth-section__form">

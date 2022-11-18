@@ -124,13 +124,13 @@ const Home: NextPage = () => {
                 </div>
               </li>
               <li>
-                <Link href="/">
-                  <a className="nav-link">Home</a>
+                <Link href="/" className="nav-link">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/recently">
-                  <a className="nav-link">Recently</a>
+                <Link href="/recently" className="nav-link">
+                  Recently
                 </Link>
               </li>
               <li>

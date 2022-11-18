@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
 
   if (pathname.startsWith("/_next")) return NextResponse.next();
 
-  const hasToken = (cookies.get("authorization") ?? false) as any;
+  const hasToken = cookies.get("authorization")?.value as string;
 
   if (hasToken) {
     const decoded = (jwt_decode(hasToken) ?? false) as { id: string };
