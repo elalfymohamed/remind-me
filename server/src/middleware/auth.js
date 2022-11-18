@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
 const PRIVET_KEY = process.env.PRIVET_KEY;
 
-export const auth = async (req, res, next) => {
+exports.auth = async (req, res, next) => {
   try {
     if (!req.headers.authorization) {
       throw new Error("Login first");

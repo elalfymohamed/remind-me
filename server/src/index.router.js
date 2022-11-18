@@ -1,16 +1,16 @@
-import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import session from "express-session";
-import MongoStore from "connect-mongo";
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
-import usersRouter from "./router/users.js";
+const usersRouter = require("./router/users.js");
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PRIVET_KEY = process.env.PRIVET_KEY;
 const NODE_ENV = process.env.NODE_ENV;
 
-export const endpoints = async (app) => {
+exports.endpoints = async (app) => {
   app.use((req, res, next) => {
     const origin = req.headers.origin;
 

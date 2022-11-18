@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import express from "express";
-import dotenv from "dotenv";
+const mongoose = require("mongoose");
+const express = require("express");
+const dotenv = require("dotenv");
 
 const app = express();
 
@@ -9,11 +9,11 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
-import { endpoints } from "./src/index.router.js";
+const { endpoints } = require("./src/index.router.js");
 
 endpoints(app);
 
-export const connectDB = async () => {
+exports.connectDB = async () => {
   mongoose
     .connect(CONNECTION_URL, {
       useNewUrlParser: true,

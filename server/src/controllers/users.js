@@ -1,14 +1,14 @@
-import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
-import jsonwebtoken from "jsonwebtoken";
+const dotenv = require("dotenv");
+const bcrypt = require("bcryptjs");
+const jsonwebtoken = require("jsonwebtoken");
 
-import Users from "../models/users.js";
+const Users = require("../models/users.js");
 
 dotenv.config();
 
 const PRIVET_KEY = process.env.PRIVET_KEY;
 
-export const signup = async (req, res) => {
+exports.signup = async (req, res) => {
   const { email, password, last_name, first_name } = req.body;
 
   try {
@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
   }
 };
 
-export const signin = async (req, res) => {
+exports.signin = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
