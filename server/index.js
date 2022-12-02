@@ -13,7 +13,22 @@ const { endpoints } = require("./src/index.router.js");
 
 endpoints(app);
 
-exports.connectDB = async () => {
+mongoose
+  .connect(CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`server running on port: ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+
+mongoose.connection.on("error", (err) => {
+  console.log(err);
   mongoose
     .connect(CONNECTION_URL, {
       useNewUrlParser: true,
@@ -27,11 +42,4 @@ exports.connectDB = async () => {
     .catch((error) => {
       console.log(error.message);
     });
-};
-
-connectDB();
-
-mongoose.connection.on("error", (err) => {
-  connectDB();
-  console.log(err);
 });

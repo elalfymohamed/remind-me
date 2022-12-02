@@ -1,14 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 
 const usersRouter = require("./router/users.js");
-
-const CONNECTION_URL = process.env.CONNECTION_URL;
-const PRIVET_KEY = process.env.PRIVET_KEY;
-const NODE_ENV = process.env.NODE_ENV;
 
 exports.endpoints = async (app) => {
   app.use((req, res, next) => {
@@ -26,25 +19,6 @@ exports.endpoints = async (app) => {
 
   app.use(express.json());
   app.use(cors());
-  app.use(cookieParser());
-
-  app.enable("trust proxy");
-
-  app.use(
-    session({
-      name: "s_id",
-      secret: PRIVET_KEY,
-      store: MongoStore.create({ mongoUrl: CONNECTION_URL }),
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        maxAge: 7 * 24 * 60 * 60 * 1000, //7 days OR ONE WEEK
-        sameSite: NODE_ENV == "dev" ? "" : "none",
-        secure: NODE_ENV == "dev" ? false : true,
-        httpOnly: false,
-      },
-    })
-  );
 
   app.use("/auth", usersRouter);
 };

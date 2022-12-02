@@ -9,4 +9,4 @@ router.post("/signup", signup);
 
 // router.get("/myProfile", userData);
 
-export default router;
+module.exports = router;
