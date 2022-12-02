@@ -5,28 +5,31 @@ import jwt_decode from "jwt-decode";
 export function middleware(request: NextRequest) {
   const { cookies } = request;
   const { pathname } = request.nextUrl;
+  try {
+    if (pathname.startsWith("/_next")) return NextResponse.next();
 
-  if (pathname.startsWith("/_next")) return NextResponse.next();
+    const hasToken = cookies.get("authorization")?.value as string;
+    let decoded = {} as { id: string };
+    if (hasToken) {
+      decoded = jwt_decode(hasToken);
 
-  const hasToken = cookies.get("authorization")?.value as string;
-
-  if (hasToken) {
-    const decoded = (jwt_decode(hasToken) ?? false) as { id: string };
-
-    if (hasToken && decoded.id) {
-      if (pathname.includes("/auth")) {
-        request.nextUrl.pathname = "/";
+      if (hasToken && decoded.id) {
+        if (pathname.includes("/auth")) {
+          request.nextUrl.pathname = "/";
+          return NextResponse.redirect(request.nextUrl);
+        }
+      } else {
+        request.nextUrl.pathname = "/auth/signin";
         return NextResponse.redirect(request.nextUrl);
       }
     } else {
-      request.nextUrl.pathname = "/auth/signin";
-      return NextResponse.redirect(request.nextUrl);
+      if (!pathname.includes("/auth")) {
+        request.nextUrl.pathname = "/auth/signin";
+        return NextResponse.redirect(request.nextUrl);
+      }
     }
-  } else {
-    if (!pathname.includes("/auth")) {
-      request.nextUrl.pathname = "/auth/signin";
-      return NextResponse.redirect(request.nextUrl);
-    }
+  } catch (error) {
+    console.log(error);
   }
 
   return NextResponse.next();

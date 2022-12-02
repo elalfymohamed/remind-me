@@ -59,7 +59,11 @@ const InputFelid: NextPage<Props> = ({ data, setData, handleSubmit }) => {
             aria-haspopup="true"
             tabIndex={0}
           >
-            {data.install ? <BsFillPinFill size="25" /> : <BsPin size="25" />}
+            {data.install ? (
+              <BsFillPinFill color="#fff" size="25" />
+            ) : (
+              <BsPin color="#fff" size="25" />
+            )}
           </div>
         </div>
         <div className="options-color">

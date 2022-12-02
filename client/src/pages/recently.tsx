@@ -1,13 +1,10 @@
 import React from "react";
 import type { NextPage } from "next";
-// router link
-import Link from "next/link";
 // components
-import InputFelid from "../components/InputFelid";
 import { Todos } from "../components/Todos";
+import { Header } from "../components/header/Header";
 // TS -> interface
 import { Todo, IsData } from "../model";
-import { Header } from "../components/header/Header";
 type DTodos = {
   NTodos: Todo[];
   ITodos: Todo[];
@@ -16,7 +13,7 @@ type DTodos = {
 // react hooks
 const { useState, useEffect } = React;
 
-const Home: NextPage = () => {
+const Recently: NextPage = () => {
   const [data, setData] = useState<IsData>({
     todo: "",
     color: "",
@@ -116,11 +113,6 @@ const Home: NextPage = () => {
       <Header />
       <section className="todo-list">
         <div className="container">
-          <InputFelid
-            data={data}
-            setData={setData}
-            handleSubmit={handleSubmit}
-          />
           <div className="todo-list-header">
             <h2>Todo List</h2>
           </div>
@@ -164,4 +156,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Recently;
