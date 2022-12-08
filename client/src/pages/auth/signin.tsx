@@ -64,9 +64,10 @@ const SignIn: NextPage = () => {
       [e.target.name]: e.target.value,
     }));
     setInputError({});
+    setErrorMsg("");
   };
 
-  const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
+  const handelSubmit = async (e: React.PointerEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { errors, valid } = validationForm();
 
@@ -74,29 +75,30 @@ const SignIn: NextPage = () => {
       setInputError(errors);
     } else {
       setIsPending(true);
-      fetchAuth("auth/signin", userData)
-        .then((res) => {
-          if (res.status === 200) {
-            Cookies.set("authorization", res.data.data.token, {
-              expires: 7,
-              path: "/",
-            });
-            setIsPending(false);
-            router.push("/");
-            setUserData({
-              email: "",
-              password: "",
-            });
-          }
-          if (res.status === 404) {
-            setErrorMsg(res.data);
-            setIsPending(false);
-          }
-        })
-        .catch((error) => {
-          console.log(error.message);
+      try {
+        const res = await fetchAuth("auth/signin", userData);
+        const data = res.data;
+
+        if (data.status === 200) {
+          Cookies.set("authorization", data.data.token, {
+            expires: 7,
+            path: "/",
+          });
           setIsPending(false);
-        });
+          router.push("/");
+          setUserData({
+            email: "",
+            password: "",
+          });
+        }
+      } catch (error: any) {
+        console.log(error.massage);
+        const err = error.response;
+        if (err?.status === 404) {
+          setErrorMsg(err.data.data);
+        }
+        setIsPending(false);
+      }
     }
   };
 
@@ -115,6 +117,11 @@ const SignIn: NextPage = () => {
           </Link>
         </div>
         <div className="auth-section__form">
+          {errorMsg && (
+            <div className="error_msg">
+              <p className="error_msg-text">{errorMsg}</p>
+            </div>
+          )}
           <form className="form-control" onSubmit={handelSubmit}>
             <CustomInput
               label="email"

@@ -12,8 +12,6 @@ import { Form_Data } from "../../model";
 import { CustomInput, CustomButton } from "../../components/ui";
 // fetch auth
 import { fetchAuth } from "../../api";
-// set Cooke
-// import { setCooke } from "../../utility/Cookies";
 
 // type -> ts
 type InputError = {
@@ -57,6 +55,7 @@ const SignUp: NextPage = () => {
       [e.target.name]: e.target.value,
     }));
     setInputError({});
+    setErrorMsg("");
   };
 
   const validationForm = (): { errors: Object; valid: Object } => {
@@ -74,7 +73,7 @@ const SignUp: NextPage = () => {
     };
   };
 
-  const handelSubmit = (e: React.PointerEvent<HTMLFormElement>) => {
+  const handelSubmit = async (e: React.PointerEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { errors, valid } = validationForm();
 
@@ -82,32 +81,32 @@ const SignUp: NextPage = () => {
       setInputError(errors);
     } else {
       setIsPending(true);
-      fetchAuth("auth/signup", userData)
-        .then((res) => {
-          console.log(res);
-          if (res.status === 201) {
-            Cookies.set("authorization", res.data.data.token, {
-              expires: 7,
-              path: "/",
-            });
-            router.push("/");
-            setIsPending(false);
-            setUserData({
-              first_name: "",
-              last_name: "",
-              email: "",
-              password: "",
-            });
-          }
-          if (res.status === 404) {
-            setErrorMsg(res.data);
-            setIsPending(false);
-          }
-        })
-        .catch((error) => {
-          console.log(error.message);
+      try {
+        const res = await fetchAuth("auth/signup", userData);
+        const data = res.data;
+
+        if (data.status === 201) {
+          Cookies.set("authorization", data.data.token, {
+            expires: 7,
+            path: "/",
+          });
+          router.push("/");
           setIsPending(false);
-        });
+          setUserData({
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
+          });
+        }
+      } catch (error: any) {
+        console.log(error.massage);
+        const err = error.response;
+        if (err?.status === 404) {
+          setErrorMsg(err.data.data);
+        }
+        setIsPending(false);
+      }
     }
   };
 
@@ -125,6 +124,11 @@ const SignUp: NextPage = () => {
           </Link>
         </div>
         <div className="auth-section__form">
+          {errorMsg && (
+            <div className="error_msg">
+              <p className="error_msg-text">{errorMsg}</p>
+            </div>
+          )}
           <form className="form-control" onSubmit={handelSubmit}>
             <CustomInput
               label="first name"

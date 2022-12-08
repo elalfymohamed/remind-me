@@ -6,8 +6,13 @@ import Cookies from "js-cookie";
 
 import { userData } from "../../utility/userData";
 
+type UserData = {
+  first_name: string;
+  last_name: string;
+};
+
 export const Header = () => {
-  const user = userData();
+  const user = userData() as UserData;
 
   const handelLogOut = () => {
     Cookies.remove("authorization");
