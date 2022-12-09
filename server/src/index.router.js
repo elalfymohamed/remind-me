@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const usersRouter = require("./router/users.js");
+const todoRouter = require("./router/todo");
 
 exports.endpoints = async (app) => {
   app.use((req, res, next) => {
@@ -21,4 +22,5 @@ exports.endpoints = async (app) => {
   app.use(cors());
 
   app.use("/auth", usersRouter);
+  app.use("/todo", todoRouter);
 };
