@@ -1,9 +1,9 @@
 export interface Todo {
-  id: number;
+  _id?: string | undefined;
   todo: string;
   color: string;
-  idDone: boolean;
-  isInstall: boolean;
+  completed: boolean;
+  install: boolean;
 }
 
 export interface IsData {

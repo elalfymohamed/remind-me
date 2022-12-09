@@ -11,13 +11,21 @@ type UserData = {
   last_name: string;
 };
 
+//  hooks react
+const { useEffect, useState } = React;
+
 export const Header = () => {
-  const user = userData() as UserData;
+  const [user, setUser] = useState<UserData>();
 
   const handelLogOut = () => {
     Cookies.remove("authorization");
     window.location.href = "/";
   };
+
+  useEffect(() => {
+    const user = userData();
+    setUser(user);
+  }, []);
 
   return (
     <header className="App-header">

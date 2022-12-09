@@ -10,6 +10,7 @@ type DecodeData = {
 
 export const userData = () => {
   const token = Cookies.get("authorization") as string;
+
   try {
     const decode = jwt_decode(token) as DecodeData;
 

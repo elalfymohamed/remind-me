@@ -1,17 +1,16 @@
-import React from "react";
+import * as React from "react";
+
 import type { NextPage } from "next";
 // router link
 import Link from "next/link";
+//
+import { fetchNewTodo } from "../api/index";
 // components
 import InputFelid from "../components/InputFelid";
-import { Todos } from "../components/Todos";
+import { Hero } from "../container/home/Hero";
+import { Header } from "../components/header/Header";
 // TS -> interface
 import { Todo, IsData } from "../model";
-import { Header } from "../components/header/Header";
-type DTodos = {
-  NTodos: Todo[];
-  ITodos: Todo[];
-};
 
 // react hooks
 const { useState, useEffect } = React;
@@ -19,90 +18,41 @@ const { useState, useEffect } = React;
 const Home: NextPage = () => {
   const [data, setData] = useState<IsData>({
     todo: "",
-    color: "",
+    color: "color-default",
     install: false,
   });
 
-  const [todos, setTodos] = useState<DTodos>({
-    NTodos: [],
-    ITodos: [],
-  });
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [iTodos, setITodos] = useState<any>([]);
+  const [nTodos, setNTodos] = useState<any>([]);
 
   //  handel submit data
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const DColor: string = "color-default";
+    if (data.todo === "") {
+      return setErrorMsg("please enter a task");
+    }
 
-    const dataObj = {
-      id: Date.now(),
-      todo: data.todo,
-      color: data.color || DColor,
-      idDone: false,
-      isInstall: data.install,
-    } as Todo;
-
-    if (data.todo.trim() !== "") {
-      if (data.install) {
-        return (
-          setTodos({
-            ...todos,
-            ITodos: [
-              ...todos.ITodos,
-              {
-                ...dataObj,
-              },
-            ],
-          }),
+    fetchNewTodo("todo", data)
+      .then(({ data }) => {
+        console.log(data);
+        if (data.status === 201) {
+          if (data.data.install) {
+            setITodos((state: []) => [...state, { ...data.data }]);
+          } else {
+            setNTodos((state: []) => [...state, { ...data.data }]);
+          }
           setData({
             todo: "",
-            color: "",
+            color: "color-default",
             install: false,
-          })
-        );
-      }
-      setTodos({
-        ...todos,
-        NTodos: [
-          ...todos.NTodos,
-          {
-            ...dataObj,
-          },
-        ],
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      setData({
-        todo: "",
-        color: "",
-        install: false,
-      });
-    }
-  };
-
-  const handelDeleteTodo = (id: number, install: boolean) => {
-    if (install) {
-      return setTodos({
-        ...todos,
-        ITodos: todos.ITodos.filter((item) => item.id !== id),
-      });
-    }
-    // if install false
-    setTodos({
-      ...todos,
-      NTodos: todos.NTodos.filter((item) => item.id !== id),
-    });
-  };
-
-  const handelChangeInstallTodo = (todo: Todo) => {
-    if (todo.isInstall) {
-      return setTodos({
-        NTodos: [...todos.NTodos, { ...todo, isInstall: false }],
-        ITodos: todos.ITodos.filter((item) => item.id !== todo.id),
-      });
-    }
-    setTodos({
-      NTodos: todos.NTodos.filter((item) => item.id !== todo.id),
-      ITodos: [...todos.ITodos, { ...todo, isInstall: true }],
-    });
   };
 
   useEffect(() => {
@@ -125,37 +75,21 @@ const Home: NextPage = () => {
             <h2>Todo List</h2>
           </div>
           <div className="todo-list-body">
-            {todos.ITodos.length >= 1 && (
-              <div className="todo-install todos">
-                <h6># Install</h6>
-                <div className="note-items">
-                  {todos.ITodos.map((item) => (
-                    <div className="todo-items" key={item.id}>
-                      <Todos
-                        item={item}
-                        handelDeleteTodo={handelDeleteTodo}
-                        handelChangeInstallTodo={handelChangeInstallTodo}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {iTodos.length >= 1 && (
+              <Hero
+                title="install"
+                todos={iTodos}
+                setITodos={setITodos}
+                setNTodos={setNTodos}
+              />
             )}
-            {todos.NTodos.length >= 1 && (
-              <div className="todo-other todos">
-                <h6># other</h6>
-                <div className="note-items">
-                  {todos.NTodos.map((item) => (
-                    <div className="todo-items" key={item.id}>
-                      <Todos
-                        item={item}
-                        handelDeleteTodo={handelDeleteTodo}
-                        handelChangeInstallTodo={handelChangeInstallTodo}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {nTodos.length >= 1 && (
+              <Hero
+                title="other"
+                todos={nTodos}
+                setITodos={setITodos}
+                setNTodos={setNTodos}
+              />
             )}
           </div>
         </div>
