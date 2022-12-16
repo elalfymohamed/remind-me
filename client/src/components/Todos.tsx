@@ -24,7 +24,7 @@ export const Todos: NextPage<Props> = ({
             className="install-todo-list"
             role={"button"}
             aria-expanded={item.install}
-            aria-label="install-todo"
+            aria-label="install todo"
             aria-haspopup="true"
             tabIndex={0}
             onClick={() => handelChangeInstallTodo(item)}
@@ -34,7 +34,7 @@ export const Todos: NextPage<Props> = ({
           <div
             className="delete-todo-list"
             role={"button"}
-            aria-label="delete-todo"
+            aria-label="delete todo"
             tabIndex={0}
             onClick={() => handelDeleteTodo(item._id, item.install)}
           >

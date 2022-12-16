@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 // components
 import { Todos } from "../components/Todos";
-import { Header } from "../components/header/Header";
+import { Header } from "../components/header";
 
 // react hooks
 const { useEffect } = React;

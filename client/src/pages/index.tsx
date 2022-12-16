@@ -8,7 +8,7 @@ import { fetchNewTodo } from "../api/index";
 // components
 import InputFelid from "../components/InputFelid";
 import { Hero } from "../container/home/Hero";
-import { Header } from "../components/header/Header";
+import { Header } from "../components/header";
 // TS -> interface
 import { Todo, IsData } from "../model";
 
@@ -55,27 +55,27 @@ const Home: NextPage = () => {
       });
   };
 
-  useEffect(() => {
-    document.body.classList.add("body-todo");
+  // useEffect(() => {
+  //   document.body.classList.add("body-todo");
 
-    return () => document.body.classList.remove("body-todo");
-  }, []);
+  //   return () => document.body.classList.remove("body-todo");
+  // }, []);
 
   return (
     <>
       <Header />
       <section className="todo-list">
         <div className="container">
-          <InputFelid
+          {/* <InputFelid
             data={data}
             setData={setData}
             handleSubmit={handleSubmit}
-          />
+          /> */}
           <div className="todo-list-header">
             <h2>Todo List</h2>
           </div>
           <div className="todo-list-body">
-            {iTodos.length >= 1 && (
+            {/* {iTodos.length >= 1 && (
               <Hero
                 title="install"
                 todos={iTodos}
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
                 setITodos={setITodos}
                 setNTodos={setNTodos}
               />
-            )}
+            )} */}
           </div>
         </div>
       </section>

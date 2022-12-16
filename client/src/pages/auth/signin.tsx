@@ -3,7 +3,7 @@ import * as React from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import Image from "next/image";
 //
 import Cookies from "js-cookie";
 // fetch auth
@@ -86,6 +86,7 @@ const SignIn: NextPage = () => {
           });
           setIsPending(false);
           router.push("/");
+          console.clear();
           setUserData({
             email: "",
             password: "",
@@ -106,7 +107,13 @@ const SignIn: NextPage = () => {
     <section className="auth-section">
       <div className="container">
         <div className="auth-section__header">
-          <h2>Add Task</h2>
+          <Image
+            src="/tasks_icon.svg"
+            alt="task logo"
+            quality={90}
+            width={80}
+            height={80}
+          />
         </div>
         <h2 className="auth-section__title">Welcome back!</h2>
         <h3 className="auth-section__your-account">Sign in to your account</h3>

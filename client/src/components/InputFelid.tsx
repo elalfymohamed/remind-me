@@ -60,9 +60,9 @@ const InputFelid: NextPage<Props> = ({ data, setData, handleSubmit }) => {
             tabIndex={0}
           >
             {data.install ? (
-              <BsFillPinFill color="#fff" size="25" />
+              <BsFillPinFill color="#000" size="25" />
             ) : (
-              <BsPin color="#fff" size="25" />
+              <BsPin color="#000" size="25" />
             )}
           </div>
         </div>
