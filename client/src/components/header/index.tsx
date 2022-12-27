@@ -1,14 +1,15 @@
 import * as React from "react";
 
-import Link from "next/link";
 import Image from "next/image";
 
 import Cookies from "js-cookie";
 
 import { FiLogOut } from "react-icons/fi";
 import { FaRunning } from "react-icons/fa";
+import { RxClock } from "react-icons/rx";
 
 import { userData } from "../../utility/userData";
+import useClockCheck from "../../hooks/useClockCheck";
 
 type UserData = {
   first_name: string;
@@ -23,6 +24,8 @@ export const Header = () => {
   const [isLogOut, setIsLogOut] = useState<boolean>(false);
 
   const logOutRef = useRef(null) as React.RefObject<HTMLButtonElement>;
+
+  const isClock = useClockCheck();
 
   const handelLogOut = () => {
     Cookies.remove("authorization");
@@ -55,6 +58,13 @@ export const Header = () => {
             />
           </div>
 
+          <div className="header-clock">
+            <span>
+              <RxClock color="#fff" size={18} />
+            </span>
+            <p className="clock">{isClock}</p>
+          </div>
+
           <ul className="nav-items">
             <li>
               <div className="nav-user">
@@ -62,16 +72,6 @@ export const Header = () => {
                   {user?.first_name} {user?.last_name}
                 </h6>
               </div>
-            </li>
-            <li className="item-link">
-              <Link href="/" className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="item-link">
-              <Link href="/recently" className="nav-link">
-                Recently
-              </Link>
             </li>
             <li>
               <button

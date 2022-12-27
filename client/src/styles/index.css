@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+}
+
 h1,
 h2,
 h3,
@@ -99,7 +103,7 @@ button:disabled {
   align-items: center;
   list-style: none;
   justify-content: space-between;
-  max-width: 550px;
+  max-width: 250px;
   width: 100%;
 }
 
@@ -124,6 +128,22 @@ button:disabled {
   color: var(--color-nav-haver);
 }
 
+.header-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-clock span {
+  padding-right: 0.3rem;
+}
+
+.header-clock .clock {
+  font-size: 0.8rem;
+  color: white;
+  font-weight: 400;
+}
+
 .btn-login {
   background-color: transparent;
   color: var(--color-white);
@@ -142,6 +162,91 @@ button:disabled {
   box-shadow: -14px -9px 20px 3px rgba(0, 0, 0, 0.897);
 }
 
+/* sidebar */
+.sidebar {
+  width: 100%;
+  max-width: 250px;
+}
+
+.sidebar-container {
+  margin-bottom: 1rem;
+}
+
+.sidebar-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.calendar {
+  display: flex;
+  align-items: center;
+}
+.day {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.my {
+  margin-right: 0.3rem;
+}
+
+.month {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.yea {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.today {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidebar-menu {
+  margin-bottom: 1rem;
+}
+
+.menu-nav {
+  padding-left: 0.5rem;
+}
+.menu-nav:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+.nav-item__icon {
+  margin-right: 0.3rem;
+  vertical-align: top;
+}
+
+.nav-item__text {
+  color: #747474;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.active {
+  background: #fff;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.active span svg,
+.active span {
+  color: #000 !important;
+}
+
+/* end sidebar */
+
 .add-task {
   width: 100%;
   max-width: 600px;
@@ -151,9 +256,9 @@ button:disabled {
 }
 
 .nav-user .user_name {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: capitalize;
 }
 

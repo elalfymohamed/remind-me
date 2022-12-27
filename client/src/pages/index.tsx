@@ -9,6 +9,7 @@ import { fetchNewTodo } from "../api/index";
 import InputFelid from "../components/InputFelid";
 import { Hero } from "../container/home/Hero";
 import { Header } from "../components/header";
+import { Sidebar } from "../components/sidebar";
 // TS -> interface
 import { Todo, IsData } from "../model";
 
@@ -66,16 +67,18 @@ const Home: NextPage = () => {
       <Header />
       <section className="todo-list">
         <div className="container">
-          {/* <InputFelid
+          <Sidebar />
+          <div className="">
+            {/* <InputFelid
             data={data}
             setData={setData}
             handleSubmit={handleSubmit}
           /> */}
-          <div className="todo-list-header">
-            <h2>Todo List</h2>
-          </div>
-          <div className="todo-list-body">
-            {/* {iTodos.length >= 1 && (
+            {/* <div className="todo-list-header">
+              <h2>Todo List</h2>
+            </div> */}
+            <div className="todo-list-body">
+              {/* {iTodos.length >= 1 && (
               <Hero
                 title="install"
                 todos={iTodos}
@@ -91,6 +94,7 @@ const Home: NextPage = () => {
                 setNTodos={setNTodos}
               />
             )} */}
+            </div>
           </div>
         </div>
       </section>
