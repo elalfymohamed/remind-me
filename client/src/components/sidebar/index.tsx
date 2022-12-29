@@ -1,22 +1,25 @@
 import * as React from "react";
 
 import Link from "next/link";
-
+//  react icons
 import {
   MdOutlineCalendarToday,
   MdDelete,
   MdOutlineTaskAlt,
 } from "react-icons/md";
-import { IoIosArrowDown, IoIosArrowUp, IoMdAdd } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
-
+import { RiAddLine } from "react-icons/ri";
+// custom hook
 import useDateCheck from "../../hooks/useDateCheck";
 
 //  hooks react
-const { useEffect, useState, useRef } = React;
+const { useState } = React;
 
 export const Sidebar = () => {
   const date = useDateCheck();
+
+  const [openProject, setOpenProject] = useState(false);
 
   return (
     <aside className="sidebar">
@@ -67,24 +70,39 @@ export const Sidebar = () => {
         </div>
         <div className="projects">
           <div className="projects-content">
-            <div className="projects-menu">
+            <div
+              className={`projects-btn ${openProject ? "projects--show" : ""}`}
+              role={"button"}
+              onClick={() => setOpenProject((prev) => !prev)}
+            >
               <span>
                 <IoIosArrowDown size={19} color="#747474" />
               </span>
               <span>Projects</span>
             </div>
-            <div className="">
-              <ul>
-                <li>
-                  <div>sfsdfds</div>
-                </li>
-                <li>
-                  <div>sfsdfds</div>
-                </li>
-                <li>
-                  <div>sfsdfds</div>
-                </li>
-              </ul>
+            <div
+              className={`projects-menu ${openProject ? "projects--show" : ""}`}
+            >
+              <div
+                className={`projects-menu__content ${
+                  openProject ? "projects-menu--show" : ""
+                }`}
+              >
+                <ul className="projects-items">
+                  <li className="project-item active">
+                    <div>sfsdfds</div>
+                  </li>
+
+                  <li className="add-project">
+                    <div className="add-project__btn" role={"button"}>
+                      <span>
+                        <RiAddLine size={16} color="#E05E4E" />
+                      </span>
+                      <span>Add project</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

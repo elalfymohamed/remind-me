@@ -91,9 +91,8 @@ const SignUp: NextPage = () => {
             expires: 7,
             path: "/",
           });
-          router.push("/");
+          window.location.href = "/";
           setIsPending(false);
-          console.clear();
           setUserData({
             first_name: "",
             last_name: "",

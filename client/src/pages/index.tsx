@@ -24,8 +24,6 @@ const Home: NextPage = () => {
   });
 
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const [iTodos, setITodos] = useState<any>([]);
-  const [nTodos, setNTodos] = useState<any>([]);
 
   //  handel submit data
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,11 +37,6 @@ const Home: NextPage = () => {
       .then(({ data }) => {
         console.log(data);
         if (data.status === 201) {
-          if (data.data.install) {
-            setITodos((state: []) => [...state, { ...data.data }]);
-          } else {
-            setNTodos((state: []) => [...state, { ...data.data }]);
-          }
           setData({
             todo: "",
             color: "color-default",
@@ -56,45 +49,13 @@ const Home: NextPage = () => {
       });
   };
 
-  // useEffect(() => {
-  //   document.body.classList.add("body-todo");
-
-  //   return () => document.body.classList.remove("body-todo");
-  // }, []);
-
   return (
     <>
-      <Header />
-      <section className="todo-list">
-        <div className="container">
+      <section className="task-section">
+        <div className="section-container">
           <Sidebar />
-          <div className="">
-            {/* <InputFelid
-            data={data}
-            setData={setData}
-            handleSubmit={handleSubmit}
-          /> */}
-            {/* <div className="todo-list-header">
-              <h2>Todo List</h2>
-            </div> */}
-            <div className="todo-list-body">
-              {/* {iTodos.length >= 1 && (
-              <Hero
-                title="install"
-                todos={iTodos}
-                setITodos={setITodos}
-                setNTodos={setNTodos}
-              />
-            )}
-            {nTodos.length >= 1 && (
-              <Hero
-                title="other"
-                todos={nTodos}
-                setITodos={setITodos}
-                setNTodos={setNTodos}
-              />
-            )} */}
-            </div>
+          <div className="section-card">
+            <div className="task-section-body"></div>
           </div>
         </div>
       </section>

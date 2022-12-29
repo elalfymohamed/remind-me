@@ -62,7 +62,7 @@ export const Header = () => {
             <span>
               <RxClock color="#fff" size={18} />
             </span>
-            <p className="clock">{isClock}</p>
+            <div className="clock">{isClock}</div>
           </div>
 
           <ul className="nav-items">

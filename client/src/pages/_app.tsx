@@ -1,8 +1,25 @@
+import Head from "next/head";
 import type { AppProps } from "next/app";
+
 import "../styles/index.css";
 
+import { Layout } from "../components/layout";
+
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./tasks_icon-home.svg" />
+        <meta name="theme-color" content="#fff" />
+        <title>todo</title>
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
+  );
 }
 
 export default MyApp;

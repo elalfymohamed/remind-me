@@ -85,8 +85,7 @@ const SignIn: NextPage = () => {
             path: "/",
           });
           setIsPending(false);
-          router.push("/");
-          console.clear();
+          window.location.href = "/";
           setUserData({
             email: "",
             password: "",
@@ -144,7 +143,6 @@ const SignIn: NextPage = () => {
               type="password"
               onChange={handelOnChange}
               name="password"
-              value={userData.password}
               errorMgs="password is require"
               inputError={inputError.password}
             />
