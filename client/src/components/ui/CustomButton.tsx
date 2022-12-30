@@ -1,3 +1,4 @@
+import React from "react";
 import { NextPage } from "next";
 
 export interface Props {
@@ -5,6 +6,7 @@ export interface Props {
   typeBtn: "submit" | "button";
   classes?: string;
   text: string;
+  attr?: object;
 }
 
 export const CustomButton: NextPage<Props> = ({
@@ -12,9 +14,15 @@ export const CustomButton: NextPage<Props> = ({
   text,
   classes = "btn-submit",
   typeBtn = "submit",
+  attr,
 }) => {
   return (
-    <button className={`${classes} btn`} type={typeBtn} disabled={isPending}>
+    <button
+      className={`${classes} btn`}
+      type={typeBtn}
+      disabled={isPending}
+      {...attr}
+    >
       {isPending ? (
         <div className="loader">
           <div className="loader-inner" />

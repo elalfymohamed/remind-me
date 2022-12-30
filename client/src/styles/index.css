@@ -17,17 +17,19 @@
   --color-blue: #2d555e;
   --color-purple: #5b2245;
   --color-black: #000000;
-  --color-font-black: #000000;
-  --color-font-dim-gray: #747474;
   --color-gray: #3c3f43;
   --color-greenish-blue: #1e3a5f;
   --color-grey: #442f19;
   --color-white: #ffffff;
-  --bg-white: #ffffff;
   --color-nav-haver: #6495ed;
   --color-btn: #6495ed;
   --color-btn-log-hover: #ad1712;
+  --color-font-black: #000000;
+  --color-font-dim-gray: #747474;
+  --bg-white: #ffffff;
+  --bg-black: #0000007e;
   --bg-header: #db4c3f;
+  --bg-card-white: #ffffff;
   --bg-home: #fafafa;
 }
 
@@ -66,6 +68,20 @@ svg {
 button:disabled {
   opacity: 0.7;
   cursor: progress;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* loader */
@@ -420,6 +436,167 @@ button:disabled {
 }
 
 /* end sidebar */
+
+/* model-add-project */
+
+.model-add-project {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-black);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.model-add-project .model-add-project__card {
+  background-color: var(--bg-card-white);
+  z-index: 21;
+  width: 550px;
+  height: 310px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.model-add-project__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-add-project__header .model-add-project__title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--color-font-dim-gray);
+}
+.model-add-project__body .model-add-project__content {
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+
+.model-add-project__body .model-add-project__content .model-add-project__name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-font-black);
+}
+
+.model-add-project__body .model-add-project__option {
+  margin: 0.2rem 0;
+}
+.model-add-project__body .model-add-project__option .model-add-project__inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-add-project__body
+  .model-add-project__option
+  .model-add-project__inputs
+  .project-input {
+  flex: 1 1 0;
+  height: 30px;
+  border-color: #20212457;
+  border-style: solid;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 1px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-font-dim-gray);
+}
+
+.model-add-project__body
+  .model-add-project__option
+  .model-add-project__inputs
+  .color-input {
+  margin-left: 1rem;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.model-add-project__body
+  .model-add-project__option
+  .model-add-project__inputs
+  .color-input::-webkit-color-swatch {
+  border-radius: 6px;
+  border: none;
+}
+
+.model-add-project__emojis {
+  margin: 1rem 0;
+}
+
+.model-add-project__emojis .model-add-project__emojis-content {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 140px;
+  scroll-margin-block: 0;
+  scroll-behavior: smooth;
+}
+
+.model-add-project__emojis .model-add-project__emojis-content .emoji-item {
+  padding: 5px;
+}
+.model-add-project__emojis
+  .model-add-project__emojis-content
+  .emoji-item
+  .emoji {
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.model-add-project__emojis
+  .model-add-project__emojis-content
+  .emoji-item
+  .emoji:hover {
+  transform: scale(1.5);
+}
+
+.point {
+  width: 7px;
+  height: 7px;
+  border-radius: 50px;
+  margin-right: 0.7rem;
+}
+
+.model-add-project__submit {
+  text-align: right;
+}
+
+.model-add-project__submit .btn-add-project {
+  width: 80px;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #305a92;
+  height: 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+/* add-project-model */
 
 .add-task {
   width: 100%;
