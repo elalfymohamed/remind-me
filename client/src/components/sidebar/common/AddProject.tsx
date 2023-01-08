@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
+import { NextPage } from "next";
+
 import emojis from "emojibase-data/en/data.json";
 
 import { CgCloseO } from "react-icons/cg";
+
 import { CustomButton } from "../../ui";
-import { NextPage } from "next";
 
 type projectObj = {
   name: string;

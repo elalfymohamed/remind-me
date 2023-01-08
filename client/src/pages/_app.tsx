@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 
 import "../styles/index.css";
 
-import { Layout } from "../components/layout";
+import { BlogLayout } from "./blog/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,9 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#fff" />
         <title>todo</title>
       </Head>
-      <Layout>
+      <BlogLayout>
         <Component {...pageProps} />
-      </Layout>
+      </BlogLayout>
     </>
   );
 }

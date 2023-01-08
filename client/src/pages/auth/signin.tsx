@@ -7,11 +7,11 @@ import Image from "next/image";
 //
 import Cookies from "js-cookie";
 // fetch auth
-import { fetchAuth } from "../../api";
+import { fetchAuth } from "@api";
 // interface -> TS
 import { Form_Data } from "../../model";
 // component -> ui
-import { CustomInput, CustomButton } from "../../components/ui";
+import { CustomInput, CustomButton } from "@components/ui";
 
 // type -> ts
 type InputError = {
@@ -77,7 +77,7 @@ const SignIn: NextPage = () => {
       setIsPending(true);
       try {
         const res = await fetchAuth("auth/signin", userData);
-        const data = res.data;
+        const data = await res.data;
 
         if (data.status === 200) {
           Cookies.set("authorization", data.data.token, {
@@ -94,9 +94,9 @@ const SignIn: NextPage = () => {
       } catch (error: any) {
         console.log(error);
         setIsPending(false);
-        const res = error.response;
-        if (res?.status === 404) {
-          setErrorMsg(res.data.data);
+        const { response } = error;
+        if (response?.status === 404) {
+          setErrorMsg(response.data.data);
         }
       }
     }

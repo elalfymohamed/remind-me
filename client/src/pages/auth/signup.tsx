@@ -10,9 +10,9 @@ import Cookies from "js-cookie";
 // interface -> TS
 import { Form_Data } from "../../model";
 // component -> ui
-import { CustomInput, CustomButton } from "../../components/ui";
+import { CustomInput, CustomButton } from "@components/ui";
 // fetch auth
-import { fetchAuth } from "../../api";
+import { fetchAuth } from "@api";
 
 // type -> ts
 type InputError = {
@@ -84,7 +84,7 @@ const SignUp: NextPage = () => {
       setIsPending(true);
       try {
         const res = await fetchAuth("auth/signup", userData);
-        const data = res.data;
+        const data = await res.data;
 
         if (data.status === 201) {
           Cookies.set("authorization", data.data.token, {
@@ -103,9 +103,9 @@ const SignUp: NextPage = () => {
       } catch (error: any) {
         console.log(error);
         setIsPending(false);
-        const res = error.response;
-        if (res?.status === 404) {
-          setErrorMsg(res.data.data);
+        const { response } = error;
+        if (response?.status === 404) {
+          setErrorMsg(response.data.data);
         }
       }
     }

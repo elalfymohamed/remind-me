@@ -3,13 +3,13 @@ import * as React from "react";
 import type { NextPage } from "next";
 
 import { useRouter } from "next/router";
-import { Header } from "../header";
+import { Header } from "@components/header";
 
 export interface Props {
   children: React.ReactNode;
 }
 
-export const Layout: NextPage<Props> = ({ children }) => {
+export const BlogLayout: NextPage<Props> = ({ children }) => {
   const { pathname } = useRouter();
 
   const isHome = typeof window !== undefined && !pathname.includes("/auth/");
