@@ -1,0 +1,15 @@
+/* loader */
+.loader {
+  width: 100%;
+}
+
+.loader-inner {
+  animation: loader-inner 1s linear infinite;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
+  height: 20px;
+  width: 20px;
+  margin: 0 auto;
+}

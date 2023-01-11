@@ -1,0 +1,61 @@
+/*  header */
+
+.App-header {
+  width: 100%;
+  background-color: $bg-header;
+  box-shadow: -14px -9px 20px 3px rgba(0, 0, 0, 0.897);
+
+  .header-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+    width: 100%;
+    position: relative;
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .header-clock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0%);
+
+        span {
+          padding-right: 0.3rem;
+        }
+
+        .clock {
+          font-size: 0.8rem;
+          color: $color-white;
+          font-weight: 400;
+        }
+      }
+
+      .nav-items {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        justify-content: space-between;
+        max-width: 250px;
+        width: 100%;
+      }
+
+      .btn-login {
+        background-color: transparent;
+        color: $color-white;
+        font-size: 18px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        padding: 5px 15px;
+        cursor: pointer;
+      }
+    }
+  }
+}

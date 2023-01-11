@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bg-home;
+  height: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Chivo Mono", monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+svg {
+  vertical-align: sub;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.active {
+  background: $color-white;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.active span svg,
+.active span {
+  color: $color-font-black !important;
+}
+
+.error_msg {
+  margin-top: 0.5rem;
+}
+
+.error_msg p {
+  color: red;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+//
+.point {
+  width: 7px;
+  height: 7px;
+  border-radius: 50px;
+  margin-right: 0.7rem;
+}
