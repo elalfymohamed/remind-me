@@ -92,12 +92,13 @@ const SignIn: NextPage = () => {
           });
         }
       } catch (error: any) {
-        console.log(error);
+        console.error(error.message);
         setIsPending(false);
         const { response } = error;
         if (response?.status === 404) {
-          setErrorMsg(response.data.data);
+          return setErrorMsg(response.data.data);
         }
+        setErrorMsg(error.message);
       }
     }
   };
