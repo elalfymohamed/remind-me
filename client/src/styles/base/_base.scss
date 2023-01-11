@@ -49,6 +49,13 @@ input:focus-visible {
   outline: none;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 25px;
+  width: 100%;
+}
+
 .btn {
   background-color: transparent;
   border: none;

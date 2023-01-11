@@ -463,13 +463,6 @@
   margin: 50px 0;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 25px;
-  width: 100%;
-}
-
 .section-container {
   display: flex;
   /* align-items: center; */
