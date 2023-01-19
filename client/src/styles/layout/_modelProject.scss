@@ -3,68 +3,99 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--bg-black);
+  background-color: $bg-black;
   overflow: hidden;
   z-index: 20;
 
   .model-add-project__card {
-    background-color: var(--bg-card-white);
+    background-color: $bg-card-white;
     z-index: 21;
     width: 550px;
-    height: 310px;
+    height: 200px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 8px;
-    padding: 1rem;
+    transition: all 0.3s ease;
+    // padding: 1rem;
+
+    &.active-emojis {
+      height: 340px;
+    }
 
     .model-add-project__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 1rem;
+      background-color: #f6f8fa;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom: 1px solid #d0d7de;
 
       .model-add-project__title {
         font-size: 0.9rem;
         font-weight: 500;
         text-transform: capitalize;
-        color: var(--color-font-dim-gray);
+        color: $color-font-dim-gray;
       }
     }
 
     .model-add-project__body {
+      padding: 0.7rem 1rem;
+
       .model-add-project__content {
         display: flex;
         align-items: center;
         margin-top: 0.3rem;
+        height: 20px;
 
         .model-add-project__name {
           font-size: 1rem;
           font-weight: 600;
           text-transform: capitalize;
-          color: var(--color-font-black);
+          color: $color-font-black;
         }
       }
       .model-add-project__option {
-        margin: 0.2rem 0;
+        margin-top: 0.5rem;
+        margin-bottom: 0.3rem;
 
         .model-add-project__inputs {
           display: flex;
           align-items: center;
           justify-content: space-between;
 
-          .project-input {
+          .emoji-control {
+            margin-right: 1rem;
+
+            .emoji-btn {
+              width: 30px;
+              height: 30px;
+              background-color: #f6f8fa;
+              border-width: 1px;
+              border-color: #1b1f2426;
+              border-radius: 4px;
+              border-style: solid;
+            }
+          }
+
+          .input-control {
             flex: 1 1 0;
-            height: 30px;
-            border-color: #20212457;
-            border-style: solid;
-            border-top-width: 0;
-            border-left-width: 0;
-            border-right-width: 0;
-            border-bottom-width: 1px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--color-font-dim-gray);
+            .project-input {
+              width: 100%;
+              height: 30px;
+              border-color: #20212457;
+              border-style: solid;
+              border-top-width: 0;
+              border-left-width: 0;
+              border-right-width: 0;
+              border-bottom-width: 1px;
+              font-size: 0.8rem;
+              font-weight: 500;
+              color: $color-font-dim-gray;
+            }
           }
 
           .color-input {
@@ -76,14 +107,14 @@
             appearance: none;
 
             &::-webkit-color-swatch {
-              border-radius: 6px;
+              border-radius: 4px;
               border: none;
             }
           }
         }
 
         .model-add-project__emojis {
-          margin: 1rem 0;
+          margin-top: 1rem;
 
           .model-add-project__emojis-content {
             display: flex;
@@ -93,9 +124,13 @@
             align-items: center;
             overflow-y: scroll;
             overflow-x: hidden;
-            height: 140px;
+            height: 0;
             scroll-margin-block: 0;
             scroll-behavior: smooth;
+            transition: all 0.4s ease;
+            &.active-emojis {
+              height: 140px;
+            }
 
             .emoji-item {
               padding: 5px;
@@ -114,9 +149,10 @@
         }
         .model-add-project__submit {
           text-align: right;
+          margin-top: 1rem;
 
           .btn-add-project {
-            width: 80px;
+            width: 120px;
             border: 0;
             font-size: 1rem;
             font-weight: 500;

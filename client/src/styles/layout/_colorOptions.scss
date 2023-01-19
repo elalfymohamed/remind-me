@@ -1,0 +1,129 @@
+.todo-options {
+  position: relative;
+}
+
+.options-color {
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.options-color-btn {
+  cursor: pointer;
+  width: max-content;
+  display: inline-block;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+.options-color-btn:hover {
+  color: var(--color-btn);
+}
+
+.options-color-btn:active {
+  transform: scale3d(1, 1, 1);
+}
+
+.option-active {
+  color: var(--color-btn);
+}
+
+.color-options-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #1c202f;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px 0;
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+
+.color-option {
+  border-radius: 50px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 35px;
+  height: 35px;
+}
+
+.color-option:hover {
+  border: 2px solid var(--color-white);
+}
+
+.color-default-option {
+  border: 1px solid #5f6368;
+  opacity: 1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-default-option svg {
+  color: $color-white;
+}
+
+.color-default {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #5f6368;
+  color: $color-black;
+}
+
+.color-automatic {
+  background-color: $color-automatic;
+  border: 1px solid #5f6368;
+  color: $color-white;
+}
+
+.color-red {
+  background-color: $color-red;
+  border: 1px solid $color-red;
+  color: $color-white;
+}
+
+.color-orange {
+  background-color: $color-orange;
+  border: 1px solid $color-orange;
+  color: $color-white;
+}
+
+.color-yellow {
+  background-color: $color-yellow;
+  border: 1px solid $color-yellow;
+  color: $color-white;
+}
+
+.color-green {
+  background-color: $color-green;
+  border: 1px solid $color-green;
+  color: $color-white;
+}
+
+.color-greenish-blue {
+  background-color: $color-greenish-blue;
+  border: 1px solid $color-greenish-blue;
+  color: $color-white;
+}
+
+.color-blue {
+  background-color: $color-blue;
+  border: 1px solid $color-blue;
+  color: $color-white;
+}
+
+.color-purple {
+  background-color: $color-purple;
+  border: 1px solid $color-purple;
+  color: $color-white;
+}
+
+.color-grey {
+  background-color: $color-grey;
+  border: 1px solid $color-grey;
+  color: $color-white;
+}

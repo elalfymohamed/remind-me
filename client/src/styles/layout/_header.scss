@@ -43,6 +43,15 @@
         justify-content: space-between;
         max-width: 250px;
         width: 100%;
+
+        .nav-user {
+          .user_name {
+            font-size: 1.1rem;
+            color: var(--color-white);
+            font-weight: 600;
+            text-transform: capitalize;
+          }
+        }
       }
 
       .btn-login {

@@ -1,19 +1,18 @@
 import React from "react";
-import { NextPage } from "next";
 
 export interface Props {
   isPending?: boolean;
   typeBtn: "submit" | "button";
   classes?: string;
-  text: string;
+  text: string | React.ReactNode;
   attr?: object;
 }
 
-export const CustomButton: NextPage<Props> = ({
+export const CustomButton: React.FC<Props> = ({
   isPending,
   text,
-  classes = "btn-submit",
-  typeBtn = "submit",
+  classes,
+  typeBtn,
   attr,
 }) => {
   return (
@@ -32,4 +31,9 @@ export const CustomButton: NextPage<Props> = ({
       )}
     </button>
   );
+};
+
+CustomButton.defaultProps = {
+  classes: "btn-submit",
+  typeBtn: "submit",
 };

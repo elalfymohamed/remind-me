@@ -74,7 +74,7 @@
       }
     }
 
-    .sidebar .projects {
+    .projects {
       margin-top: 2rem;
 
       .projects-content {
@@ -93,18 +93,11 @@
               text-transform: capitalize;
             }
 
-            & :first-child {
+            svg {
               padding-right: 0.3rem;
-              //
-              transform: rotate(180deg);
               color: $color-font-black !important;
-
-              & {
-                svg {
-                  transform: rotate(0deg);
-                  transition: transform 0.3s ease;
-                }
-              }
+              transform: rotate(0deg);
+              transition: transform 0.3s ease;
             }
           }
 
@@ -114,11 +107,8 @@
                 color: $color-font-black;
               }
 
-              &:first-child {
-                svg {
-                  transform: rotate(180deg);
-                  color: var(--color-font-black) !important;
-                }
+              svg {
+                transform: rotate(360deg);
               }
             }
           }

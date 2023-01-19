@@ -20,7 +20,6 @@ type UserData = {
 const { useEffect, useState, useRef } = React;
 
 export const Header = () => {
-  const [user, setUser] = useState<UserData>();
   const [isLogOut, setIsLogOut] = useState<boolean>(false);
 
   const logOutRef = useRef(null) as React.RefObject<HTMLButtonElement>;
@@ -32,10 +31,8 @@ export const Header = () => {
     window.location.href = "/";
   };
 
-  useEffect(() => {
-    const user = userData();
-    setUser(user);
-  }, []);
+  //  user  data
+  const isUser = typeof window !== undefined && (userData() as UserData);
 
   useEffect(() => {
     if (logOutRef.current === null) return;
@@ -65,20 +62,20 @@ export const Header = () => {
             <div className="clock">{isClock}</div>
           </div>
 
-          <ul className="nav-items">
-            <li>
-              <div className="nav-user">
-                <h6 className="user_name">
-                  {user?.first_name} {user?.last_name}
-                </h6>
-              </div>
-            </li>
-            <li>
+          <div className="nav-items">
+            <div className="nav-user">
+              <h6 className="user_name">
+                {isUser?.first_name} {isUser?.last_name}
+              </h6>
+            </div>
+
+            <div className="nav-logout">
               <button
                 type="button"
                 className="btn btn-login"
                 onClick={handelLogOut}
                 title="log out"
+                aria-label="log out"
                 ref={logOutRef}
               >
                 {isLogOut ? (
@@ -87,8 +84,8 @@ export const Header = () => {
                   <FiLogOut size={22} color="#fff " />
                 )}
               </button>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </header>

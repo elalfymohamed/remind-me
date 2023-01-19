@@ -21,12 +21,15 @@ const { useState } = React;
 export const Sidebar = () => {
   const date = useDateCheck();
 
-  const [openProject, setOpenProject] = useState<boolean>(false);
-  const [addProject, setAddProject] = useState<boolean>(false);
+  const [showProject, setShowProject] = useState<boolean>(false);
+  const [openModel, setOpenModel] = useState<boolean>(false);
 
   return (
     <>
-      {addProject && <AddProject setAddProject={setAddProject} />}
+      <AddProject
+        openModel={openModel}
+        closeModel={(state) => setOpenModel(state)}
+      />
       <aside className="sidebar">
         <div className="sidebar-container">
           <div className="sidebar-date">
@@ -77,10 +80,10 @@ export const Sidebar = () => {
             <div className="projects-content">
               <div
                 className={`projects-btn ${
-                  openProject ? "projects--show" : ""
+                  showProject ? "projects--show" : ""
                 }`}
                 role={"button"}
-                onClick={() => setOpenProject((prev) => !prev)}
+                onClick={() => setShowProject((prev) => !prev)}
               >
                 <span>
                   <IoIosArrowDown size={19} color="#747474" />
@@ -89,12 +92,12 @@ export const Sidebar = () => {
               </div>
               <div
                 className={`projects-menu ${
-                  openProject ? "projects--show" : ""
+                  showProject ? "projects--show" : ""
                 }`}
               >
                 <div
                   className={`projects-menu__content ${
-                    openProject ? "projects-menu--show" : ""
+                    showProject ? "projects-menu--show" : ""
                   }`}
                 >
                   <ul className="projects-items">
@@ -106,7 +109,7 @@ export const Sidebar = () => {
                       <div
                         className="add-project__btn"
                         role={"button"}
-                        onClick={() => setAddProject(true)}
+                        onClick={() => setOpenModel(true)}
                       >
                         <span>
                           <RiAddLine size={16} color="#E05E4E" />
