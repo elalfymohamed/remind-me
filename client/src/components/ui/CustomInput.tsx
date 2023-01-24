@@ -9,7 +9,7 @@ export interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorMgs?: string;
   inputError?: boolean;
-  value?: string | boolean;
+  value?: string;
 }
 
 export const CustomInput: NextPage<Props> = ({

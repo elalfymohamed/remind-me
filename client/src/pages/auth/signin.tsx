@@ -18,17 +18,31 @@ type InputError = {
   password?: boolean;
 };
 
-// react hooks
-const { useState } = React;
-const SignIn: NextPage = () => {
-  const [userData, setUserData] = useState<Form_Data | any>({
-    email: "",
-    password: "",
-  });
+type StateReducer = {
+  userData: Form_Data;
+  inputError: InputError;
+  errorMsg: string;
+  isPending: boolean;
+};
 
-  const [inputError, setInputError] = useState<InputError>({});
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [isPending, setIsPending] = useState<boolean>(false);
+// react hooks
+const { useReducer } = React;
+const SignIn: NextPage = () => {
+  const [state, updateState] = useReducer(
+    (state: StateReducer, newState: Partial<StateReducer>) => ({
+      ...state,
+      ...newState,
+    }),
+    {
+      userData: {
+        email: "",
+        password: "",
+      },
+      inputError: {},
+      errorMsg: "",
+      isPending: false,
+    }
+  );
 
   const validation = {
     email: (val: string): boolean | string =>
@@ -38,14 +52,14 @@ const SignIn: NextPage = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#/|])[A-Za-z\d@$!%*?&#/|]{8,}$/.test(
         val
       ),
-  } as Form_Data | any;
+  } as unknown;
 
   const validationForm = (): { valid: boolean; errors: object } => {
-    let errors = {} as InputError | any;
-    let valid = false as any;
+    let errors = {} as object;
+    let valid = false as boolean;
 
-    for (let key of Object.keys(userData)) {
-      errors[key] = !validation[key](userData[key]);
+    for (let key of Object.keys(state.userData)) {
+      errors[key] = !validation[key](state.userData[key]);
       valid |= errors[key];
     }
 
@@ -56,12 +70,14 @@ const SignIn: NextPage = () => {
   };
 
   const handelOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((state: Form_Data) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-    setInputError({});
-    setErrorMsg("");
+    updateState({
+      userData: {
+        ...state.userData,
+        [e.target.name]: e.target.value,
+      },
+      inputError: {},
+      errorMsg: "",
+    });
   };
 
   const handelSubmit = async (e: React.PointerEvent<HTMLFormElement>) => {
@@ -69,11 +85,11 @@ const SignIn: NextPage = () => {
     const { errors, valid } = validationForm();
 
     if (!valid) {
-      setInputError(errors);
+      updateState({ inputError: errors });
     } else {
-      setIsPending(true);
+      updateState({ isPending: true });
       try {
-        const res = await fetchAuth("auth/signin", userData);
+        const res = await fetchAuth("auth/signin", state.userData);
         const data = await res.data;
 
         if (data.status === 200) {
@@ -81,21 +97,25 @@ const SignIn: NextPage = () => {
             expires: 7,
             path: "/",
           });
-          setIsPending(false);
           window.location.href = "/";
-          setUserData({
-            email: "",
-            password: "",
+
+          updateState({
+            userData: {
+              email: "",
+              password: "",
+            },
+            isPending: false,
           });
         }
       } catch (error: any) {
         console.error(error.message);
-        setIsPending(false);
+        updateState({ isPending: true });
+
         const { response } = error;
         if (response?.status === 404) {
-          return setErrorMsg(response.data.data);
+          return updateState({ errorMsg: response.data.data });
         }
-        setErrorMsg(error.message);
+        updateState({ errorMsg: error.message });
       }
     }
   };
@@ -121,9 +141,9 @@ const SignIn: NextPage = () => {
           </Link>
         </div>
         <div className="auth-section__form">
-          {errorMsg && (
+          {state.errorMsg && (
             <div className="error_msg">
-              <p className="error_msg-text">{errorMsg}</p>
+              <p className="error_msg-text">{state.errorMsg}</p>
             </div>
           )}
           <form className="form-control" onSubmit={handelSubmit}>
@@ -132,9 +152,9 @@ const SignIn: NextPage = () => {
               type="email"
               onChange={handelOnChange}
               name="email"
-              value={userData.email}
+              value={state.userData.email}
               errorMgs="email is require"
-              inputError={inputError.email}
+              inputError={state.inputError.email}
             />
             <CustomInput
               label="password"
@@ -142,13 +162,14 @@ const SignIn: NextPage = () => {
               onChange={handelOnChange}
               name="password"
               errorMgs="password is require"
-              inputError={inputError.password}
+              inputError={state.inputError.password}
             />
             <div className="form__submit">
               <CustomButton
                 text="submit"
                 typeBtn="submit"
-                isPending={isPending}
+                isPending={state.isPending}
+                attr={{ onClick: () => console.log("E") }}
               />
             </div>
           </form>

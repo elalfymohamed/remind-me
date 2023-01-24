@@ -4,7 +4,7 @@ export interface Props {
   isPending?: boolean;
   typeBtn: "submit" | "button";
   classes?: string;
-  text: string | React.ReactNode;
+  text: React.ReactNode;
   attr?: object;
 }
 
