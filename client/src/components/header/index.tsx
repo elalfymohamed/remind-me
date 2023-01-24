@@ -26,13 +26,13 @@ export const Header = () => {
 
   const isClock = useClockCheck();
 
+  //  user data
+  const { first_name, last_name } = userData() as UserData;
+
   const handelLogOut = () => {
     Cookies.remove("authorization");
     window.location.href = "/";
   };
-
-  //  user  data
-  const isUser = typeof window !== undefined && (userData() as UserData);
 
   useEffect(() => {
     if (logOutRef.current === null) return;
@@ -65,7 +65,7 @@ export const Header = () => {
           <div className="nav-items">
             <div className="nav-user">
               <h6 className="user_name">
-                {isUser?.first_name} {isUser?.last_name}
+                {first_name} {last_name}
               </h6>
             </div>
 
