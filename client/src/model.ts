@@ -13,8 +13,8 @@ export interface IsData {
 }
 
 export interface Form_Data {
-  first_name?: string | boolean;
-  last_name?: string | boolean;
-  email: string | boolean;
-  password: string | boolean;
+  first_name?: string;
+  last_name?: string;
+  email: string;
+  password: string;
 }

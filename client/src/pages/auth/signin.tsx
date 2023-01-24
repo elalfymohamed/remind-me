@@ -2,7 +2,6 @@ import * as React from "react";
 
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
 //
 import Cookies from "js-cookie";
@@ -22,8 +21,6 @@ type InputError = {
 // react hooks
 const { useState } = React;
 const SignIn: NextPage = () => {
-  const router = useRouter();
-
   const [userData, setUserData] = useState<Form_Data | any>({
     email: "",
     password: "",

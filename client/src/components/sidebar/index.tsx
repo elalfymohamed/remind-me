@@ -27,8 +27,8 @@ export const Sidebar = () => {
   return (
     <>
       <AddProject
-        openModel={openModel}
-        closeModel={(state) => setOpenModel(state)}
+        showModel={openModel}
+        onRequestClose={(state) => setOpenModel(state)}
       />
       <aside className="sidebar">
         <div className="sidebar-container">

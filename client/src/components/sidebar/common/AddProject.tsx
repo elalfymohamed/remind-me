@@ -8,7 +8,7 @@ import { CustomButton } from "../../ui";
 
 type projectObj = {
   name: string;
-  color: string;
+  hairColor: string;
 };
 
 type emojiObj = {
@@ -17,16 +17,16 @@ type emojiObj = {
 };
 
 export interface Props {
-  openModel: boolean;
-  closeModel: (state: boolean) => void;
+  showModel: boolean;
+  onRequestClose: (state: boolean) => void;
 }
 
-export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
+export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
   const defaultColor = "#000" as string;
 
   const [project, setProject] = useState<projectObj>({
     name: "",
-    color: defaultColor,
+    hairColor: defaultColor,
   });
 
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -46,7 +46,7 @@ export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
   };
 
   const handelCloseModel = () => {
-    closeModel(false);
+    onRequestClose(false);
   };
 
   const handelOnSubmit = () => {
@@ -55,7 +55,7 @@ export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
 
   return (
     <>
-      {openModel && (
+      {showModel && (
         <div className="model-add-project">
           <div
             className={`model-add-project__card ${
@@ -79,7 +79,7 @@ export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
               <div className="model-add-project__content">
                 <div
                   className="point"
-                  style={{ backgroundColor: project.color }}
+                  style={{ backgroundColor: project.hairColor }}
                 />
                 <h5 className="model-add-project__name">{project.name}</h5>
               </div>
@@ -110,7 +110,7 @@ export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
                     <input
                       type="color"
                       className="color-input"
-                      value={project.color}
+                      value={project.hairColor}
                       name="color"
                       onChange={handelOnChange}
                     />
@@ -164,5 +164,5 @@ export const AddProject: React.FC<Props> = ({ openModel, closeModel }) => {
 };
 
 AddProject.defaultProps = {
-  openModel: false,
+  showModel: false,
 };

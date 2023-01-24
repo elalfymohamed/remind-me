@@ -2,7 +2,6 @@ import * as React from "react";
 
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Image from "next/image";
 
 //
@@ -15,6 +14,7 @@ import { CustomInput, CustomButton } from "@components/ui";
 import { fetchAuth } from "@api";
 
 // type -> ts
+
 type InputError = {
   email?: boolean;
   password?: boolean;
@@ -22,21 +22,33 @@ type InputError = {
   last_name?: boolean;
 };
 
+type StateReducer = {
+  userData: Form_Data;
+  inputError: InputError;
+  errorMsg: string;
+  isPending: boolean;
+};
+
 // react hooks
-const { useState } = React;
+const { useReducer } = React;
 const SignUp: NextPage = () => {
-  const router = useRouter();
-
-  const [userData, setUserData] = useState<Form_Data | any>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-  });
-
-  const [inputError, setInputError] = useState<InputError>({});
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [state, updateState] = useReducer(
+    (state: StateReducer, newState: Partial<StateReducer>) => ({
+      ...state,
+      ...newState,
+    }),
+    {
+      userData: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+      },
+      inputError: {},
+      errorMsg: "",
+      isPending: false,
+    }
+  );
 
   const validation = {
     last_name: (val: string): number => val.length,
@@ -48,23 +60,25 @@ const SignUp: NextPage = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#/|])[A-Za-z\d@$!%*?&#/|]{8,}$/.test(
         val
       ),
-  } as Form_Data | any;
+  } as unknown;
 
   const handelOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((state: Form_Data) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-    setInputError({});
-    setErrorMsg("");
+    updateState({
+      userData: {
+        ...state.userData,
+        [e.target.name]: e.target.value,
+      },
+      inputError: {},
+      errorMsg: "",
+    });
   };
 
-  const validationForm = (): { errors: Object; valid: Object } => {
-    let errors = {} as any;
-    let valid = false as any;
+  const validationForm = (): { errors: object; valid: boolean } => {
+    let errors = {} as object;
+    let valid = false as boolean;
 
-    for (let key of Object.keys(userData)) {
-      errors[key] = !validation[key](userData[key]);
+    for (let key of Object.keys(state.userData)) {
+      errors[key] = !validation[key](state.userData[key]);
       valid |= errors[key];
     }
 
@@ -79,11 +93,12 @@ const SignUp: NextPage = () => {
     const { errors, valid } = validationForm();
 
     if (!valid) {
-      setInputError(errors);
+      updateState({ inputError: errors });
     } else {
-      setIsPending(true);
+      updateState({ isPending: true });
+
       try {
-        const res = await fetchAuth("auth/signup", userData);
+        const res = await fetchAuth("auth/signup", state.userData);
         const data = await res.data;
 
         if (data.status === 201) {
@@ -92,22 +107,30 @@ const SignUp: NextPage = () => {
             path: "/",
           });
           window.location.href = "/";
-          setIsPending(false);
-          setUserData({
-            first_name: "",
-            last_name: "",
-            email: "",
-            password: "",
+          updateState({
+            userData: {
+              first_name: "",
+              last_name: "",
+              email: "",
+              password: "",
+            },
+            inputError: {},
+            errorMsg: "",
+            isPending: false,
           });
         }
       } catch (error: any) {
         console.error(error.message);
-        setIsPending(false);
+        updateState({
+          isPending: false,
+        });
         const { response } = error;
         if (response?.status === 404) {
-          return setErrorMsg(response.data.data);
+          return updateState({ errorMsg: response.data.data });
         }
-        setErrorMsg(error.message);
+        updateState({
+          errorMsg: error.message,
+        });
       }
     }
   };
@@ -132,9 +155,9 @@ const SignUp: NextPage = () => {
           </Link>
         </div>
         <div className="auth-section__form">
-          {errorMsg && (
+          {state.errorMsg && (
             <div className="error_msg">
-              <p className="error_msg-text">{errorMsg}</p>
+              <p className="error_msg-text">{state.errorMsg}</p>
             </div>
           )}
           <form className="form-control" onSubmit={handelSubmit}>
@@ -143,42 +166,42 @@ const SignUp: NextPage = () => {
               type="text"
               onChange={handelOnChange}
               name="first_name"
-              value={userData.first_name}
+              value={state.userData.first_name}
               errorMgs="first name is require"
-              inputError={inputError.first_name}
+              inputError={state.inputError.first_name}
             />
             <CustomInput
               label="last name"
               type="text"
               onChange={handelOnChange}
               name="last_name"
-              value={userData.last_name}
+              value={state.userData.last_name}
               errorMgs="last name is require"
-              inputError={inputError.last_name}
+              inputError={state.inputError.last_name}
             />
             <CustomInput
               label="email"
               type="email"
               onChange={handelOnChange}
               name="email"
-              value={userData.email}
+              value={state.userData.email}
               errorMgs="email is require"
-              inputError={inputError.email}
+              inputError={state.inputError.email}
             />
             <CustomInput
               label="password"
               type="password"
               onChange={handelOnChange}
               name="password"
-              value={userData.password}
+              value={state.userData.password}
               errorMgs="password is require"
-              inputError={inputError.password}
+              inputError={state.inputError.password}
             />
             <div className="form__submit">
               <CustomButton
                 text="submit"
                 typeBtn="submit"
-                isPending={isPending}
+                isPending={state.isPending}
               />
             </div>
           </form>
