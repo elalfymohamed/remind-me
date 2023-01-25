@@ -11,6 +11,8 @@ import { fetchAuth } from "@api";
 import { Form_Data } from "../../model";
 // component -> ui
 import { CustomInput, CustomButton } from "@components/ui";
+// logo
+import logo from "../../../public/tasks_icon.svg";
 
 // type -> ts
 type InputError = {
@@ -125,8 +127,8 @@ const SignIn: NextPage = () => {
       <div className="container">
         <div className="auth-section__header">
           <Image
-            src="/tasks_icon.svg"
-            alt="task logo"
+            src={logo}
+            alt="remind me logo"
             quality={90}
             width={80}
             height={80}

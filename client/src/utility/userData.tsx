@@ -15,9 +15,9 @@ export const userData = () => {
     const decode = jwt_decode(token) as DecodeData;
 
     return {
-      first_name: decode.first_name || "",
-      last_name: decode.last_name || "",
-      email: decode.email || "",
+      first_name: decode.first_name ?? "",
+      last_name: decode.last_name ?? "",
+      email: decode.email ?? "",
     };
   } catch (error) {
     console.log(error);

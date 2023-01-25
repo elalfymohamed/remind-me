@@ -12,9 +12,10 @@ import { Form_Data } from "../../model";
 import { CustomInput, CustomButton } from "@components/ui";
 // fetch auth
 import { fetchAuth } from "@api";
+// logo
+import logo from "../../../public/tasks_icon.svg";
 
 // type -> ts
-
 type InputError = {
   email?: boolean;
   password?: boolean;
@@ -121,16 +122,12 @@ const SignUp: NextPage = () => {
         }
       } catch (error: any) {
         console.error(error.message);
-        updateState({
-          isPending: false,
-        });
+        updateState({ isPending: false });
         const { response } = error;
         if (response?.status === 404) {
           return updateState({ errorMsg: response.data.data });
         }
-        updateState({
-          errorMsg: error.message,
-        });
+        updateState({ errorMsg: error.message });
       }
     }
   };
@@ -140,8 +137,8 @@ const SignUp: NextPage = () => {
       <div className="container">
         <div className="auth-section__header">
           <Image
-            src="/tasks_icon.svg"
-            alt="task logo"
+            src={logo}
+            alt="remind me logo"
             quality={90}
             width={80}
             height={80}

@@ -20,14 +20,12 @@ type UserData = {
 const { useEffect, useState, useRef } = React;
 
 export const Header = () => {
+  const [isUser, setIsUser] = useState<UserData>();
   const [isLogOut, setIsLogOut] = useState<boolean>(false);
 
   const logOutRef = useRef(null) as React.RefObject<HTMLButtonElement>;
 
   const isClock = useClockCheck();
-
-  //  user data
-  const { first_name, last_name } = userData() as UserData;
 
   const handelLogOut = () => {
     Cookies.remove("authorization");
@@ -35,6 +33,8 @@ export const Header = () => {
   };
 
   useEffect(() => {
+    const user = userData() as UserData;
+    setIsUser(user);
     if (logOutRef.current === null) return;
     logOutRef.current.addEventListener("mouseout", () => setIsLogOut(false));
     logOutRef.current.addEventListener("mousemove", () => setIsLogOut(true));
@@ -65,7 +65,7 @@ export const Header = () => {
           <div className="nav-items">
             <div className="nav-user">
               <h6 className="user_name">
-                {first_name} {last_name}
+                {isUser?.first_name} {isUser?.last_name}
               </h6>
             </div>
 

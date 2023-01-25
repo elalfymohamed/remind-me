@@ -101,7 +101,7 @@ export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
                       type="text"
                       className="project-input"
                       value={project.name}
-                      placeholder="project"
+                      placeholder="Set Project"
                       name="name"
                       onChange={handelOnChange}
                     />
@@ -111,7 +111,7 @@ export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
                       type="color"
                       className="color-input"
                       value={project.hairColor}
-                      name="color"
+                      name="hairColor"
                       onChange={handelOnChange}
                     />
                   </div>
@@ -122,26 +122,25 @@ export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
                       openEmojis ? "active-emojis" : ""
                     }`}
                   >
-                    {openEmojis &&
-                      isEmojis.map((item, index) => (
-                        <div className="emoji-item" key={index}>
-                          <div
-                            className="emoji"
-                            title={item.label}
-                            data-label={item.label}
-                            aria-label={`emoji ${item.label}`}
-                            role="button"
-                            onClick={() =>
-                              setProject((prev) => ({
-                                ...prev,
-                                name: `${prev.name}${item.emoji}`,
-                              }))
-                            }
-                          >
-                            {item.emoji}
-                          </div>
+                    {isEmojis.map((item, index) => (
+                      <div className="emoji-item" key={index}>
+                        <div
+                          className="emoji"
+                          title={item.label}
+                          data-label={item.label}
+                          aria-label={`emoji ${item.label}`}
+                          role="button"
+                          onClick={() =>
+                            setProject((prev) => ({
+                              ...prev,
+                              name: `${prev.name}${item.emoji}`,
+                            }))
+                          }
+                        >
+                          {item.emoji}
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
 

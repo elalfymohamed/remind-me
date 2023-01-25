@@ -6,7 +6,6 @@ import Link from "next/link";
 //
 import { fetchNewTodo } from "../api/index";
 // components
-import InputFelid from "../components/InputFelid";
 import { Hero } from "../container/home/Hero";
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
