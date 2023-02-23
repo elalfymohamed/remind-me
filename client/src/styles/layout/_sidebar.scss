@@ -122,6 +122,10 @@
             height: 230px;
             overflow-y: scroll;
             overflow-x: hidden;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
           }
 
           .projects-items {

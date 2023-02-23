@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 
 import "../styles/globals.scss";
 
-import { BlogLayout } from "./blog/layout";
+import { BlogLayout } from "./layouts/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

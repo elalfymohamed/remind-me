@@ -47,6 +47,11 @@ export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
 
   const handelCloseModel = () => {
     onRequestClose(false);
+    setProject({
+      name: "",
+      hairColor: defaultColor,
+    });
+    setOpenEmojis(false);
   };
 
   const handelOnSubmit = () => {

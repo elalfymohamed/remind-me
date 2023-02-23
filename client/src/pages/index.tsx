@@ -7,7 +7,6 @@ import Link from "next/link";
 import { fetchNewTodo } from "../api/index";
 // components
 import { Hero } from "../container/home/Hero";
-import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
 // TS -> interface
 import { Todo, IsData } from "../model";
@@ -16,37 +15,8 @@ import { Todo, IsData } from "../model";
 const { useState, useEffect } = React;
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<IsData>({
-    todo: "",
-    color: "color-default",
-    install: false,
-  });
 
-  const [errorMsg, setErrorMsg] = useState<string>("");
-
-  //  handel submit data
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (data.todo === "") {
-      return setErrorMsg("please enter a task");
-    }
-
-    fetchNewTodo("todo", data)
-      .then(({ data }) => {
-        console.log(data);
-        if (data.status === 201) {
-          setData({
-            todo: "",
-            color: "color-default",
-            install: false,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
 
   return (
     <>
@@ -54,7 +24,9 @@ const Home: NextPage = () => {
         <div className="section-container">
           <Sidebar />
           <div className="section-card">
-            <div className="task-section-body"></div>
+            <div className="task-section-body">
+              
+            </div>
           </div>
         </div>
       </section>
