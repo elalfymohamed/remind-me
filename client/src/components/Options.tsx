@@ -1,11 +1,12 @@
-import type { NextPage } from "next";
+import React from "react";
+// import package react icons
 import { MdOutlineInvertColorsOff } from "react-icons/md";
 
 interface Props {
   handleClickOptions: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-export const Options: NextPage<Props> = ({ handleClickOptions }) => {
+export const Options: React.FC<Props> = ({ handleClickOptions }) => {
   const colors = [
     "default",
     "automatic",
@@ -19,7 +20,7 @@ export const Options: NextPage<Props> = ({ handleClickOptions }) => {
     "grey",
   ] as string[];
 
-  const defaultColor = "default" as string;
+  const defaultColor = "default";
 
   return (
     <div className="color-options-group">
@@ -31,8 +32,7 @@ export const Options: NextPage<Props> = ({ handleClickOptions }) => {
               ? `color-${item}-option color-option`
               : `color-${item} color-option`
           }
-          role="option"
-          aria-selected={"false"}
+          role="button"
           aria-labelledby={`color-${item}`}
           tabIndex={0}
           aria-label={`color-${item}`}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
+//  import package emoji
 import emojis from "emojibase-data/en/data.json";
-
+// import package react icons
 import { MdClose } from "react-icons/md";
-
+// import custom ui component
 import { CustomButton } from "../../ui";
 
 type projectObj = {

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
 
+// import style
 import "../styles/globals.scss";
 
 import { BlogLayout } from "./layouts/layout";

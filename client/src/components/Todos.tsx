@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-
-import { Todo } from "../model";
-
+//  import package react icons
 import { BsFillPinFill, BsPin } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
+
+import { Todo } from "../model";
 
 interface Props {
   item: Todo;

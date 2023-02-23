@@ -1,7 +1,7 @@
 import * as React from "react";
-
+//  import Link -> next
 import Link from "next/link";
-//  react icons
+//  import package react icons
 import {
   MdOutlineCalendarToday,
   MdDelete,
@@ -10,9 +10,9 @@ import {
 import { IoIosArrowDown } from "react-icons/io";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { RiAddLine } from "react-icons/ri";
-// custom hook
+// import custom hook
 import useDateCheck from "../../hooks/useDateCheck";
-//
+// import component
 import { AddProject } from "./common/AddProject";
 
 //  hooks react

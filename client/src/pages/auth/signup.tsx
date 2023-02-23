@@ -1,19 +1,19 @@
 import * as React from "react";
 
 import type { NextPage } from "next";
+// import Link - Image -> next
 import Link from "next/link";
 import Image from "next/image";
-
-//
+// import package js-cookie
 import Cookies from "js-cookie";
+// import custom ui component
+import { CustomInput, CustomButton } from "@components/ui";
+// import function fetch auth
+import { fetchAuth } from "@api";
+// import image -> logo
+import logo from "../../../public/tasks_icon.svg";
 // interface -> TS
 import { Form_Data } from "../../model";
-// component -> ui
-import { CustomInput, CustomButton } from "@components/ui";
-// fetch auth
-import { fetchAuth } from "@api";
-// logo
-import logo from "../../../public/tasks_icon.svg";
 
 // type -> ts
 type InputError = {

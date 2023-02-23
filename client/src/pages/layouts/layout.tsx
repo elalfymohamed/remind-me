@@ -3,6 +3,7 @@ import * as React from "react";
 import type { NextPage } from "next";
 
 import { useRouter } from "next/router";
+// import component
 import { Header } from "@components/header";
 
 export interface Props {

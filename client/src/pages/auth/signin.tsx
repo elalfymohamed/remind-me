@@ -1,17 +1,17 @@
 import * as React from "react";
-
 import type { NextPage } from "next";
+// import Link - Image -> next
 import Link from "next/link";
 import Image from "next/image";
-//
+// import package js-cookie
 import Cookies from "js-cookie";
-// fetch auth
+// import function fetch auth
 import { fetchAuth } from "@api";
 // interface -> TS
 import { Form_Data } from "../../model";
-// component -> ui
+// import custom ui component
 import { CustomInput, CustomButton } from "@components/ui";
-// logo
+// import image -> logo
 import logo from "../../../public/tasks_icon.svg";
 
 // type -> ts
@@ -111,7 +111,7 @@ const SignIn: NextPage = () => {
         }
       } catch (error: any) {
         console.error(error.message);
-        updateState({ isPending: true });
+        updateState({ isPending: false });
 
         const { response } = error;
         if (response?.status === 404) {

@@ -1,14 +1,15 @@
 import * as React from "react";
-
+// import image -> next
 import Image from "next/image";
-
+//  import package js-cookie
 import Cookies from "js-cookie";
-
+//  import package react icons
 import { FiLogOut } from "react-icons/fi";
 import { FaRunning } from "react-icons/fa";
 import { RxClock } from "react-icons/rx";
-
+// import function get data user
 import { userData } from "../../utility/userData";
+// import custom hook
 import useClockCheck from "../../hooks/useClockCheck";
 
 type UserData = {
