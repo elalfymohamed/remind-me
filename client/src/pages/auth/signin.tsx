@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 // import function fetch auth
 import { fetchAuth } from "@api";
 // interface -> TS
-import { Form_Data } from "../../model";
+import { Form_Data } from "../../shared/model";
 // import custom ui component
 import { CustomInput, CustomButton } from "@components/ui";
 // import image -> logo

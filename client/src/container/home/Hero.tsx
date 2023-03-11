@@ -2,7 +2,7 @@ import * as React from "react";
 import type { NextPage } from "next";
 
 import { Todos } from "../../components/Todos";
-import { Todo } from "../../model";
+import { Todo } from "../../shared/model";
 
 interface Props {
   todos: [];

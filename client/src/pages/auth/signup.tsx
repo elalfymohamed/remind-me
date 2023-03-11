@@ -13,7 +13,7 @@ import { fetchAuth } from "@api";
 // import image -> logo
 import logo from "../../../public/tasks_icon.svg";
 // interface -> TS
-import { Form_Data } from "../../model";
+import { Form_Data } from "../../shared/model";
 
 // type -> ts
 type InputError = {

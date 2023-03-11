@@ -9,24 +9,19 @@ import { fetchNewTodo } from "../api/index";
 import { Hero } from "../container/home/Hero";
 import { Sidebar } from "../components/sidebar";
 // TS -> interface
-import { Todo, IsData } from "../model";
+import { Todo, IsData } from "../shared/model";
 
 // react hooks
 const { useState, useEffect } = React;
 
 const Home: NextPage = () => {
-
-  
-
   return (
     <>
       <section className="task-section">
         <div className="section-container">
           <Sidebar />
           <div className="section-card">
-            <div className="task-section-body">
-              
-            </div>
+            <div className="task-section-body"></div>
           </div>
         </div>
       </section>

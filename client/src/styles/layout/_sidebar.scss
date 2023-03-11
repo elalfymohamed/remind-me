@@ -95,7 +95,6 @@
 
             svg {
               padding-right: 0.3rem;
-              color: $color-font-black !important;
               transform: rotate(0deg);
               transition: transform 0.3s ease;
             }
@@ -108,7 +107,8 @@
               }
 
               svg {
-                transform: rotate(360deg);
+                transform: rotate(180deg);
+                color: $color-font-black !important;
               }
             }
           }

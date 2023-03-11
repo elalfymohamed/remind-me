@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { BsFillPinFill, BsPin } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 
-import { Todo } from "../model";
+import { Todo } from "../shared/model";
 
 interface Props {
   item: Todo;

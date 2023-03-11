@@ -18,3 +18,8 @@ export interface Form_Data {
   email: string;
   password: string;
 }
+
+export type projectObj = {
+  name: string;
+  hairColor: string;
+};

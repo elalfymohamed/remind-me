@@ -5,11 +5,8 @@ import emojis from "emojibase-data/en/data.json";
 import { MdClose } from "react-icons/md";
 // import custom ui component
 import { CustomButton } from "../../ui";
-
-type projectObj = {
-  name: string;
-  hairColor: string;
-};
+// import type
+import { projectObj } from "../../../shared/model";
 
 type emojiObj = {
   emoji: string;
@@ -19,9 +16,14 @@ type emojiObj = {
 export interface Props {
   showModel: boolean;
   onRequestClose: (state: boolean) => void;
+  onRequestData: (data: projectObj) => void;
 }
 
-export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
+export const AddProject: React.FC<Props> = ({
+  showModel,
+  onRequestClose,
+  onRequestData,
+}) => {
   const defaultColor = "#000" as string;
 
   const [project, setProject] = useState<projectObj>({
@@ -56,6 +58,7 @@ export const AddProject: React.FC<Props> = ({ showModel, onRequestClose }) => {
 
   const handelOnSubmit = () => {
     console.log("handelOnSubmit");
+    onRequestData(project);
   };
 
   return (

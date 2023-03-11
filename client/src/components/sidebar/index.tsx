@@ -14,6 +14,8 @@ import { RiAddLine } from "react-icons/ri";
 import useDateCheck from "../../hooks/useDateCheck";
 // import component
 import { AddProject } from "./common/AddProject";
+// import type
+import { projectObj } from "../../shared/model";
 
 //  hooks react
 const { useState } = React;
@@ -21,14 +23,16 @@ const { useState } = React;
 export const Sidebar = () => {
   const date = useDateCheck();
 
-  const [showProject, setShowProject] = useState<boolean>(false);
-  const [openModel, setOpenModel] = useState<boolean>(false);
+  const [showProject, setShowProject] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
+  const [dataProjects, setDataProjects] = useState<projectObj[]>([]);
 
   return (
     <>
       <AddProject
         showModel={openModel}
         onRequestClose={(state) => setOpenModel(state)}
+        onRequestData={(data) => setDataProjects((prev) => [...prev, data])}
       />
       <aside className="sidebar">
         <div className="sidebar-container">
@@ -84,9 +88,11 @@ export const Sidebar = () => {
                 }`}
                 role={"button"}
                 onClick={() => setShowProject((prev) => !prev)}
+                tabIndex={0}
+                aria-label="show projects"
               >
                 <span>
-                  <IoIosArrowDown size={19} color="#747474" />
+                  <IoIosArrowDown size={20} color="#747474" />
                 </span>
                 <span>Projects</span>
               </div>
@@ -101,15 +107,25 @@ export const Sidebar = () => {
                   }`}
                 >
                   <ul className="projects-items">
-                    <li className="project-item active">
-                      <div>sfsdfds</div>
-                    </li>
+                    {dataProjects.map((item, index) => (
+                      <li className="project-item active" key={index}>
+                        <div>
+                          <div
+                            className="point"
+                            style={{ background: item.hairColor }}
+                          />
+                          <p>{item.name}</p>
+                        </div>
+                      </li>
+                    ))}
 
                     <li className="add-project">
                       <div
                         className="add-project__btn"
                         role={"button"}
                         onClick={() => setOpenModel(true)}
+                        tabIndex={0}
+                        aria-label="add new project"
                       >
                         <span>
                           <RiAddLine size={16} color="#E05E4E" />
